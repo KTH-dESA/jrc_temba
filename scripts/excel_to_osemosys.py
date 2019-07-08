@@ -22,9 +22,11 @@ def csv_from_excel(filepath, input_workbook):
     """
     workBook = xlrd.open_workbook(os.path.join(filepath, input_workbook))
     sheetNames = workBook.sheet_names()  # I read all the sheets in the xlsx file
-    modifiedSheetNames = modifyNames(sheetNames)  # I modify the names of the sheets since some do not match with the actual ones
+    # I modify the names of the sheets since some do not match with the actual ones
+    modifiedSheetNames = modifyNames(sheetNames)
 
-    for i in range(len(sheetNames)):  # 14-27 line: I create all the csv files in a new folder called CSVFiles
+    # 14-27 line: I create all the csv files in a new folder called CSVFiles
+    for i in range(len(sheetNames)):
         sh = workBook.sheet_by_name(sheetNames[i])  # all the sheet names
         if not os.path.exists("CSVFiles"):
             os.makedirs("CSVFiles")  # creates the csv folder
@@ -40,11 +42,12 @@ def csv_from_excel(filepath, input_workbook):
                 else:
                     wr.writerow(sh.row_values(rownum))
 
-    fileOutput = parseCSVFilesAndConvert(modifiedSheetNames)  # I create a txt file - string that contains the csv files
+    # I create a txt file - string that contains the csv files
+    fileOutput = parseCSVFilesAndConvert(modifiedSheetNames)
     if not os.path.exists("output"):  # I create the output folder
         os.makedirs("output")
 
-    with open("output/Output.txt", "w") as text_file:
+    with open("output_data/output.txt", "w") as text_file:
         text_file.write(fileOutput)
         text_file.write("end\n")
 
@@ -52,228 +55,259 @@ def csv_from_excel(filepath, input_workbook):
     del workBook
 
 
-def parseCSVFilesAndConvert(sheetNames): #for loop pou trexei ola ta sheet name kai paragei to format se csv
+# for loop pou trexei ola ta sheet name kai paragei to format se csv
+def parseCSVFilesAndConvert(sheetNames):
     result = ''
     for i in range(len(sheetNames)):
-      if (sheetNames[i] in ['STORAGE', 'EMISSION', 'MODE_OF_OPERATION', 'REGION', 'FUEL', 'TIMESLICE', 'TECHNOLOGY', 'YEAR']): #8 #all the   parameters thad do not have variables
-        result += 'set ' + sheetNames[i] + ' := '
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          for row in reader:
-            result += " ".join(row) + " "
-      elif (sheetNames[i] in ['AccumulatedAnnualDemand', 'CapitalCost', 'FixedCost', 'ResidualCapacity', 'SpecifiedAnnualDemand',   'TotalAnnualMinCapacity', 'TotalAnnualMinCapacityInvestment', 'TotalTechnologyAnnualActivityLowerLimit']): #24 #all the parameters   that have one variable
-        result += 'param ' + sheetNames[i] + ' default 0 := '
-        result += '\n[REGION, *, *]:\n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0) #removes the first element of the row
-          result += " ".join(newRow) + " "
-          result += ':=\n'
-          for row in reader:
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['TotalAnnualMaxCapacityInvestment']): #24 #all the parameters that have one variable
-        result += 'param ' + sheetNames[i] + ' default 99999 := '
-        result += '\n[REGION, *, *]:\n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0) #removes the first element of the row
-          result += " ".join(newRow) + " "
-          result += ':=\n'
-          for row in reader:
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['AvailabilityFactor']):
-        result += 'param ' + sheetNames[i] + ' default 1 := '
-        result += '\n[REGION, *, *]:\n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0) #removes the first element of the row
-          result += " ".join(newRow) + " "
-          result += ':=\n'
-          for row in reader:
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['TotalAnnualMaxCapacity', 'TotalTechnologyAnnualActivityUpperLimit']):
-        result += 'param ' + sheetNames[i] + ' default 9999999 := '
-        result += '\n[REGION, *, *]:\n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0) #removes the first element of the row
-          result += " ".join(newRow) + " "
-          result += ':=\n'
-          for row in reader:
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['AnnualEmissionLimit']):
-        result += 'param ' + sheetNames[i] + ' default 99999 := '
-        result += '\n[REGION, *, *]:\n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0) #removes the first element of the row
-          result += " ".join(newRow) + " "
-          result += ':=\n'
-          for row in reader:
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['YearSplit']):
-        result += 'param ' + sheetNames[i] + ' default 0 :\n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0) #removes the first element of the row
-          result += " ".join(newRow) + " "
-          result += ':=\n'
-          for row in reader:
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['CapacityOfOneTechnologyUnit', 'EmissionsPenalty', 'REMinProductionTarget', 'RETagFuel', 'RETagTechnology',   'ReserveMargin', 'ReserveMarginTagFuel', 'ReserveMarginTagTechnology', 'TradeRoute']):
-        result += 'param ' + sheetNames[i] + ' default 0 := \n'
-      elif (sheetNames[i] in ['SpecifiedDemandProfile']): #3 #all the parameters that have 2 variables
-        result += 'param ' + sheetNames[i] + ' default 0 := \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0)
-          newRow.pop(0)
-          year = newRow.copy()
-          for row in reader:
-            result += '[REGION, ' + row.pop(0) + ', *, *]:'
-            result += '\n'
-            result += " ".join(year) + " "
-            result += ':=\n'
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['VariableCost']): #3 #all the parameters that have 2 variables
-        result += 'param ' + sheetNames[i] + ' default 9999999 := \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0)
-          newRow.pop(0)
-          year = newRow.copy()
-          for row in reader:
-            result += '[REGION, ' + row.pop(0) + ', *, *]:'
-            result += '\n'
-            result += " ".join(year) + " "
-            result += ':=\n'
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['CapacityFactor']): #3 #all the parameters that have 2 variables
-        result += 'param ' + sheetNames[i] + ' default 1 := \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0)
-          newRow.pop(0)
-          year = newRow.copy()
-          for row in reader:
-            result += '[REGION, ' + row.pop(0) + ', *, *]:'
-            result += '\n'
-            result += " ".join(year) + " "
-            result += ':=\n'
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['EmissionActivityRatio', 'InputActivityRatio', 'OutputActivityRatio']): #3 #all the parameters that have 3   variables
-        result += 'param ' + sheetNames[i] + ' default 0 := \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          newRow.pop(0)
-          newRow.pop(0)
-          newRow.pop(0)
-          year = newRow.copy()
-          for row in reader:
-            result += '[REGION, ' + row.pop(0) + ', ' + row.pop(0) + ', *, *]:'
-            result += '\n'
-            result += " ".join(year) + " "
-            result += ':=\n'
-            result += " ".join(row) + " "
-            result += '\n'
-      elif (sheetNames[i] in ['TotalTechnologyModelPeriodActivityUpperLimit']): #8 #all the parameters that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 9999999 : \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          firstColumn = []
-          secondColumn = []
-          secondColumn.append('REGION')
-          for row in reader:
-            firstColumn.append(row[0])
-            secondColumn.append(row[1])
-          result += " ".join(firstColumn) + ' '
-          result += ':=\n'
-          result += " ".join(secondColumn) + ' '
-          result += '\n'
-      elif (sheetNames[i] in ['CapacityToActivityUnit']):
-        result += 'param ' + sheetNames[i] + ' default 1 : \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          firstColumn = []
-          secondColumn = []
-          secondColumn.append('REGION')
-          for row in reader:
-            firstColumn.append(row[0])
-            secondColumn.append(row[1])
-          result += " ".join(firstColumn) + ' '
-          result += ':=\n'
-          result += " ".join(secondColumn) + ' '
-          result += '\n'
-      elif (sheetNames[i] in ['TotalTechnologyAnnualActivityLowerLimit']): #8 #all the parameters that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 0 := \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          firstColumn = []
-          secondColumn = []
-          secondColumn.append('REGION')
-          for row in reader:
-            firstColumn.append(row[0])
-            secondColumn.append(row[1])
-          result += " ".join(firstColumn) + ' '
-          result += ':=\n'
-          result += " ".join(secondColumn) + ' '
-          result += '\n'
-      elif (sheetNames[i] in ['ModelPeriodEmissionLimit']): #8 #all the parameters that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 999999 := \n'
-      elif (sheetNames[i] in ['ModelPeriodExogenousEmission', 'AnnualExogenousEmission', 'OperationalLifeStorage']): #8 #all the parameters   that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 0 := \n'
-      elif (sheetNames[i] in []): #8 #all the parameters that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 0 := \n'
-      elif (sheetNames[i] in ['TotalTechnologyModelPeriodActivityLowerLimit']): #8 #all the parameters that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 0 := \n'
-      elif (sheetNames[i] in ['DepreciationMethod']): #8 #all the parameters that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 1 := \n'
-      elif (sheetNames[i] in ['OperationalLife']): #8 #all the parameters that do not have variables
-        result += 'param ' + sheetNames[i] + ' default 1 : \n'
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          newRow = next(reader)
-          firstColumn = []
-          secondColumn = []
-          secondColumn.append('REGION')
-          for row in reader:
-            firstColumn.append(row[0])
-            secondColumn.append(row[1])
-          result += " ".join(firstColumn) + ' '
-          result += ':=\n'
-          result += " ".join(secondColumn) + ' '
-          result += '\n'
-      elif (sheetNames[i] in ['DiscountRate']): #default value
-        with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
-          reader = csv.reader(csvfile)
-          for row in reader:
-            result += 'param ' + sheetNames[i] + ' default 0.1 := \n'
-      result += '\n'
+        # 8 #all the     parameters thad do not have variables
+        if (sheetNames[i] in ['STORAGE', 'EMISSION', 'MODE_OF_OPERATION',
+                              'REGION', 'FUEL', 'TIMESLICE', 'TECHNOLOGY',
+                              'YEAR']):
+            result += 'set ' + sheetNames[i] + ' := '
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    result += " ".join(row) + " "
+        # 24 #all the parameters     that have one variable
+        elif (sheetNames[i] in ['AccumulatedAnnualDemand', 'CapitalCost',
+                                'FixedCost', 'ResidualCapacity',
+                                'SpecifiedAnnualDemand',
+                                'TotalAnnualMinCapacity',
+                                'TotalAnnualMinCapacityInvestment',
+                                'TotalTechnologyAnnualActivityLowerLimit']):
+            result += 'param ' + sheetNames[i] + ' default 0 := '
+            result += '\n[REGION, *, *]:\n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)  # removes the first element of the row
+                result += " ".join(newRow) + " "
+                result += ':=\n'
+                for row in reader:
+                    result += " ".join(row) + " "
+                    result += '\n'
+        # 24 #all the parameters that have one variable
+        elif (sheetNames[i] in ['TotalAnnualMaxCapacityInvestment']):
+            result += 'param ' + sheetNames[i] + ' default 99999 := '
+            result += '\n[REGION, *, *]:\n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)  # removes the first element of the row
+                result += " ".join(newRow) + " "
+                result += ':=\n'
+                for row in reader:
+                    result += " ".join(row) + " "
+                    result += '\n'
+        elif (sheetNames[i] in ['AvailabilityFactor']):
+            result += 'param ' + sheetNames[i] + ' default 1 := '
+            result += '\n[REGION, *, *]:\n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)  # removes the first element of the row
+                result += " ".join(newRow) + " "
+                result += ':=\n'
+                for row in reader:
+                    result += " ".join(row) + " "
+                    result += '\n'
+        elif (sheetNames[i] in ['TotalAnnualMaxCapacity',
+                                'TotalTechnologyAnnualActivityUpperLimit']):
+            result += 'param ' + sheetNames[i] + ' default 9999999 := '
+            result += '\n[REGION, *, *]:\n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)  # removes the first element of the row
+                result += " ".join(newRow) + " "
+                result += ':=\n'
+                for row in reader:
+                    result += " ".join(row) + " "
+                    result += '\n'
+        elif (sheetNames[i] in ['AnnualEmissionLimit']):
+            result += 'param ' + sheetNames[i] + ' default 99999 := '
+            result += '\n[REGION, *, *]:\n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)  # removes the first element of the row
+                result += " ".join(newRow) + " "
+                result += ':=\n'
+                for row in reader:
+                    result += " ".join(row) + " "
+                    result += '\n'
+        elif (sheetNames[i] in ['YearSplit']):
+            result += 'param ' + sheetNames[i] + ' default 0 :\n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)  # removes the first element of the row
+                result += " ".join(newRow) + " "
+                result += ':=\n'
+                for row in reader:
+                    result += " ".join(row) + " "
+                    result += '\n'
+        elif (sheetNames[i] in ['CapacityOfOneTechnologyUnit',
+                                'EmissionsPenalty', 'REMinProductionTarget',
+                                'RETagFuel', 'RETagTechnology',
+                                'ReserveMargin', 'ReserveMarginTagFuel',
+                                'ReserveMarginTagTechnology', 'TradeRoute']):
+            result += 'param ' + sheetNames[i] + ' default 0 := \n'
+        # 3 #all the parameters that have 2 variables
+        elif (sheetNames[i] in ['SpecifiedDemandProfile']):
+            result += 'param ' + sheetNames[i] + ' default 0 := \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)
+                newRow.pop(0)
+                year = newRow.copy()
+                for row in reader:
+                    result += '[REGION, ' + row.pop(0) + ', *, *]:'
+                    result += '\n'
+                    result += " ".join(year) + " "
+                    result += ':=\n'
+                    result += " ".join(row) + " "
+                    result += '\n'
+        # 3 #all the parameters that have 2 variables
+        elif (sheetNames[i] in ['VariableCost']):
+            result += 'param ' + sheetNames[i] + ' default 9999999 := \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)
+                newRow.pop(0)
+                year = newRow.copy()
+                for row in reader:
+                    result += '[REGION, ' + row.pop(0) + ', *, *]:'
+                    result += '\n'
+                    result += " ".join(year) + " "
+                    result += ':=\n'
+                    result += " ".join(row) + " "
+                    result += '\n'
+        # 3 #all the parameters that have 2 variables
+        elif (sheetNames[i] in ['CapacityFactor']):
+            result += 'param ' + sheetNames[i] + ' default 1 := \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)
+                newRow.pop(0)
+                year = newRow.copy()
+                for row in reader:
+                    result += '[REGION, ' + row.pop(0) + ', *, *]:'
+                    result += '\n'
+                    result += " ".join(year) + " "
+                    result += ':=\n'
+                    result += " ".join(row) + " "
+                    result += '\n'
+        # 3 #all the parameters that have 3     variables
+        elif (sheetNames[i] in ['EmissionActivityRatio', 'InputActivityRatio',
+                                'OutputActivityRatio']):
+            result += 'param ' + sheetNames[i] + ' default 0 := \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                newRow.pop(0)
+                newRow.pop(0)
+                newRow.pop(0)
+                year = newRow.copy()
+                for row in reader:
+                    result += '[REGION, ' + \
+                        row.pop(0) + ', ' + row.pop(0) + ', *, *]:'
+                    result += '\n'
+                    result += " ".join(year) + " "
+                    result += ':=\n'
+                    result += " ".join(row) + " "
+                    result += '\n'
+        # 8 #all the parameters that do not have variables
+        elif (sheetNames[i] in ['TotalTechnologyModelPeriodActivityUpperLimit']):
+            result += 'param ' + sheetNames[i] + ' default 9999999 : \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                firstColumn = []
+                secondColumn = []
+                secondColumn.append('REGION')
+                for row in reader:
+                    firstColumn.append(row[0])
+                    secondColumn.append(row[1])
+                result += " ".join(firstColumn) + ' '
+                result += ':=\n'
+                result += " ".join(secondColumn) + ' '
+                result += '\n'
+        elif (sheetNames[i] in ['CapacityToActivityUnit']):
+            result += 'param ' + sheetNames[i] + ' default 1 : \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                firstColumn = []
+                secondColumn = []
+                secondColumn.append('REGION')
+                for row in reader:
+                    firstColumn.append(row[0])
+                    secondColumn.append(row[1])
+                result += " ".join(firstColumn) + ' '
+                result += ':=\n'
+                result += " ".join(secondColumn) + ' '
+                result += '\n'
+        # 8 #all the parameters that do not have variables
+        elif (sheetNames[i] in ['TotalTechnologyAnnualActivityLowerLimit']):
+            result += 'param ' + sheetNames[i] + ' default 0 := \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                firstColumn = []
+                secondColumn = []
+                secondColumn.append('REGION')
+                for row in reader:
+                    firstColumn.append(row[0])
+                    secondColumn.append(row[1])
+                result += " ".join(firstColumn) + ' '
+                result += ':=\n'
+                result += " ".join(secondColumn) + ' '
+                result += '\n'
+        # 8 #all the parameters that do not have variables
+        elif (sheetNames[i] in ['ModelPeriodEmissionLimit']):
+            result += 'param ' + sheetNames[i] + ' default 999999 := \n'
+        # 8 #all the   parameters   that do not have variables
+        elif (sheetNames[i] in ['ModelPeriodExogenousEmission', 'AnnualExogenousEmission', 'OperationalLifeStorage']):
+            result += 'param ' + sheetNames[i] + ' default 0 := \n'
+        elif (sheetNames[i] in []):  # 8 #all the parameters that do not have variables
+            result += 'param ' + sheetNames[i] + ' default 0 := \n'
+        # 8 #all the parameters that do not have variables
+        elif (sheetNames[i] in ['TotalTechnologyModelPeriodActivityLowerLimit']):
+            result += 'param ' + sheetNames[i] + ' default 0 := \n'
+        # 8 #all the parameters that do not have variables
+        elif (sheetNames[i] in ['DepreciationMethod']):
+            result += 'param ' + sheetNames[i] + ' default 1 := \n'
+        # 8 #all the parameters that do not have variables
+        elif (sheetNames[i] in ['OperationalLife']):
+            result += 'param ' + sheetNames[i] + ' default 1 : \n'
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                newRow = next(reader)
+                firstColumn = []
+                secondColumn = []
+                secondColumn.append('REGION')
+                for row in reader:
+                    firstColumn.append(row[0])
+                    secondColumn.append(row[1])
+                result += " ".join(firstColumn) + ' '
+                result += ':=\n'
+                result += " ".join(secondColumn) + ' '
+                result += '\n'
+        elif (sheetNames[i] in ['DiscountRate']):  # default value
+            with open('CSVFiles/' + sheetNames[i] + '.csv', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    result += 'param ' + sheetNames[i] + ' default 0.1 := \n'
+        result += '\n'
     return result
 
-def modifyNames(sheetNames): #I change the name of the sheets in the xlsx file to match with the csv actual ones
+
+# I change the name of the sheets in the xlsx file to match with the csv actual ones
+def modifyNames(sheetNames):
     modifiedNames = sheetNames.copy()
     for i in range(len(modifiedNames)):
         if (modifiedNames[i] == "TotalAnnualMaxCapacityInvestmen"):
@@ -289,10 +323,6 @@ def modifyNames(sheetNames): #I change the name of the sheets in the xlsx file t
         elif (modifiedNames[i] == "TotalTechnologyModelPeriodActUp"):
             modifiedNames[i] = "TotalTechnologyModelPeriodActivityUpperLimit"
     return modifiedNames
-
-
-# with open("C:/Users/pappis/Box Sync/dESA/06 Projects/2018-12_JRC_TEMBA/03. Work/02. Modelling/Python script_Ioannis/output/output.txt", "a") as myfile:
-#     myfile.write("end\n")
 
 
 if __name__ == '__main__':
