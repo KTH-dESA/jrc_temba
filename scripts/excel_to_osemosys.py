@@ -44,8 +44,8 @@ def csv_from_excel(filepath, input_workbook):
 
     # I create a txt file - string that contains the csv files
     fileOutput = parseCSVFilesAndConvert(modifiedSheetNames)
-    if not os.path.exists("output"):  # I create the output folder
-        os.makedirs("output")
+    if not os.path.exists("output_data"):  # I create the output folder
+        os.makedirs("output_data")
 
     with open("output_data/output.txt", "w") as text_file:
         text_file.write(fileOutput)
