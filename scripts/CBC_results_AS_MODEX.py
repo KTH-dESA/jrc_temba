@@ -36,7 +36,7 @@ def main(data_file):
             # Extracts list of COMMODITIES from data file. Some models use FUEL instead.
             if line.startswith('set COMMODITY'):
                 fuel_list = line.split(' ')[3:-1]
-             # Extracts list of FUELS from data file. Some models use COMMODITIES instead.
+            # Extracts list of FUELS from data file. Some models use COMMODITIES instead.
             if line.startswith('set FUEL'):
                 fuel_list = line.split(' ')[3:-1]
             if line.startswith('set TECHNOLOGY'):
@@ -62,7 +62,7 @@ def main(data_file):
                     mode = line.split(' ')[0]
                     data_out.append(tuple([fuel, tech, mode]))
                     data_all.append(tuple([tech, mode]))
-                    for i in range(0,len(years)):
+                    for i in range(0, len(years)):
                         output_table.append(tuple([tech, fuel, mode, years[i], values[i]]))
             if line.startswith('param OutputActivityRatio'):
                 parsing = True
