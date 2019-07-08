@@ -49,17 +49,17 @@ def main(data_file):
 
     with open(data_file, 'r') as f:
         for line in f:
-            if line.startswith("\n"):
+            if line.strip().startswith(";"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
                     fuel = line.split(', ')[2]
                     tech = line.split(', ')[1]
                 elif line.startswith(start_year):
-                    years = line.rstrip(':= \n').split(' ')[0:]
+                    years = line.rstrip(':= ;\n').split(' ')[0:]
                     years = [i.strip(':=').strip() for i in years]
                 elif not line.startswith(start_year):
-                    values = line.rstrip(':= \n').split(' ')[1:]
+                    values = line.rstrip(':= ;\n').split(' ')[1:]
                     if values:
                         mode = line.split(' ')[0]
                         data_out.append(tuple([fuel, tech, mode]))
@@ -72,7 +72,7 @@ def main(data_file):
 
     with open(data_file, 'r') as f:
         for line in f:
-            if line.startswith("\n"):
+            if line.strip().startswith(";"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
@@ -91,7 +91,7 @@ def main(data_file):
 
     with open(data_file) as f:
         for line in f:
-            if line.startswith("\n"):
+            if line.strip().startswith(";"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
@@ -108,7 +108,7 @@ def main(data_file):
 
     with open(data_file) as f:
         for line in f:
-            if line.startswith("\n"):
+            if line.strip().startswith(";"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
@@ -200,7 +200,7 @@ def main(data_file):
                     line = 'set MODExTECHNOLOGYperSTORAGEfrom[' + str(each) + ']:='
                 file_out.write(line + ';' + '\n')
 
-        file_out.write('end;')
+        file_out.write('end;\n')
 
 
 if __name__ == '__main__':
