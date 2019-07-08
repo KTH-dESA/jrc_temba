@@ -45,31 +45,34 @@ def main(data_file):
                 storage_list = line.split(' ')[3:-1]
             if line.startswith('set MODE_OF_OPERATION'):
                 mode_list = line.split(' ')[3:-1]
+        print("Start year: {}".format(start_year))
 
     with open(data_file, 'r') as f:
         for line in f:
-            if line.startswith(";"):
+            if line.startswith("\n"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
                     fuel = line.split(', ')[2]
                     tech = line.split(', ')[1]
                 elif line.startswith(start_year):
-                    years = line.rstrip().split(' ')[0:]
-                    years = [i.strip(' :=') for i in years]
+                    years = line.rstrip(':= \n').split(' ')[0:]
+                    years = [i.strip(':=').strip() for i in years]
                 elif not line.startswith(start_year):
-                    values = line.rstrip().split(' ')[1:]
-                    mode = line.split(' ')[0]
-                    data_out.append(tuple([fuel, tech, mode]))
-                    data_all.append(tuple([tech, mode]))
-                    for i in range(0, len(years)):
-                        output_table.append(tuple([tech, fuel, mode, years[i], values[i]]))
+                    values = line.rstrip(':= \n').split(' ')[1:]
+                    if values:
+                        mode = line.split(' ')[0]
+                        data_out.append(tuple([fuel, tech, mode]))
+                        data_all.append(tuple([tech, mode]))
+                        assert len(values) == len(years), "Values and years don't match in line {}".format(line)
+                        for i in range(0, len(years)):
+                            output_table.append(tuple([tech, fuel, mode, years[i], values[i]]))
             if line.startswith('param OutputActivityRatio'):
                 parsing = True
 
     with open(data_file, 'r') as f:
         for line in f:
-            if line.startswith(";"):
+            if line.startswith("\n"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
@@ -88,7 +91,7 @@ def main(data_file):
 
     with open(data_file) as f:
         for line in f:
-            if line.startswith(";"):
+            if line.startswith("\n"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
@@ -105,7 +108,7 @@ def main(data_file):
 
     with open(data_file) as f:
         for line in f:
-            if line.startswith(";"):
+            if line.startswith("\n"):
                 parsing = False
             if parsing:
                 if line.startswith('['):
@@ -203,6 +206,8 @@ def main(data_file):
 if __name__ == '__main__':
 
     if len(sys.argv) != 2:
+        msg = "Usage: python {} <filepath>"
+        print(msg.format(sys.argv[0]))
         sys.exit(1)
     else:
         data_file = sys.argv[1]
