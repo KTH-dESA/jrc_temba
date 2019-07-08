@@ -1,0 +1,9 @@
+output_data/*
+results/*
+*.csv
+*.sol
+*.lp
+*.zip
+CSVFiles/*
+.ipynb_*
+.vscode
