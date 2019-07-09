@@ -7,3 +7,4 @@ results/*
 CSVFiles/*
 .ipynb_*
 .vscode
+scripts/convert_cplex_to_cbc.py
