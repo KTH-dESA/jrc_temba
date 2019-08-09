@@ -11,13 +11,13 @@ import os
 import sys
 
 
-def main(filepath, input_workbook):
+def main(filepath, input_workbook, output_file):
     """Read the xlsx file
     """
-    csv_from_excel(filepath, input_workbook)
+    csv_from_excel(filepath, input_workbook, output_file)
 
 
-def csv_from_excel(filepath, input_workbook):
+def csv_from_excel(filepath, input_workbook, output_file):
     """Read the workbook and
     """
     workBook = xlrd.open_workbook(os.path.join(filepath, input_workbook))
@@ -44,10 +44,7 @@ def csv_from_excel(filepath, input_workbook):
 
     # I create a txt file - string that contains the csv files
     fileOutput = parseCSVFilesAndConvert(modifiedSheetNames)
-    if not os.path.exists("output_data"):  # I create the output folder
-        os.makedirs("output_data")
-
-    with open("output_data/output.txt", "w") as text_file:
+    with open(output_file, "w") as text_file:
         text_file.write(fileOutput)
         text_file.write("end;\n")
 
@@ -249,9 +246,12 @@ def modifyNames(sheetNames):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        msg = "Usage: python {} <filepath> <workbook_filename>"
+    if len(sys.argv) != 4:
+        msg = "Usage: python {} <filepath> <workbook_filename> <output_filepath>"
         print(msg.format(sys.argv[0]))
         sys.exit(1)
     else:
-        main(sys.argv[1], sys.argv[2])
+        try:
+            main(sys.argv[1], sys.argv[2], sys.argv[3])
+        except:
+            sys.exit(1)
