@@ -1,7 +1,28 @@
 """Generate a pickle file from TEMBA solution
-"""
 
-def main(data_file, pickle_file):
+Notes
+-----
+Could use existing CSVFiles melted into narrow dataframes::
+
+    >>> df = pd.read_csv('CSVFiles/EmissionActivityRatio.csv')
+    >>> df.melt(id_vars=['TECHNOLOGY','EMISSION','MODEOFOPERATION'],
+                var_name='YEAR',
+                value_name="EmissionActivityRatio")
+"""
+import sys
+import pandas as pd
+
+
+def main(data_file : str, pickle_file : str):
+    """
+
+    Arguments
+    ---------
+    data_file : str
+        Path to the solution file
+    pickle_file : str
+        Path to which to write the pickle file
+    """
 
     df = pd.read_csv(data_file, sep='$', header=None, skiprows=2)
     df.columns = ['temp']
@@ -10,36 +31,36 @@ def main(data_file, pickle_file):
 
     params = df.parameter.unique()
     all_params = {}
-    cols = {'NewCapacity':['r','t','y'],
-                'AccumulatedNewCapacity':['r','t','y'], 
-                'TotalCapacityAnnual':['r','t','y'],
-                'CapitalInvestment':['r','t','y'],
-                'AnnualVariableOperatingCost':['r','t','y'],
-                'AnnualFixedOperatingCost':['r','t','y'],
-                'SalvageValue':['r','t','y'],
-                'DiscountedSalvageValue':['r','t','y'],
-                'TotalTechnologyAnnualActivity':['r','t','y'],
-                'RateOfActivity':['r','l','t','m','y'],
-                'RateOfTotalActivity':['r','t','l','y'],
-                'Demand':['r','l','f','y'],
-                'TotalAnnualTechnologyActivityByMode':['r','t','m','y'],
-                'TotalTechnologyModelPeriodActivity':['r','t'],
-                'ProductionByTechnologyAnnual':['r','t','f','y'],
-                'AnnualTechnologyEmissionByMode':['r','t','e','m','y'],
-                'AnnualTechnologyEmission':['r','t','e','y'],
-                'AnnualEmissions':['r','e','y'],
-                'UseByTechnologyAnnual':['r','t','f','y']
-        }
+    cols = {'NewCapacity': ['r','t','y'],
+            'AccumulatedNewCapacity':['r','t','y'], 
+            'TotalCapacityAnnual':['r','t','y'],
+            'CapitalInvestment':['r','t','y'],
+            'AnnualVariableOperatingCost':['r','t','y'],
+            'AnnualFixedOperatingCost':['r','t','y'],
+            'SalvageValue':['r','t','y'],
+            'DiscountedSalvageValue':['r','t','y'],
+            'TotalTechnologyAnnualActivity':['r','t','y'],
+            'RateOfActivity':['r','l','t','m','y'],
+            'RateOfTotalActivity':['r','t','l','y'],
+            'Demand':['r','l','f','y'],
+            'TotalAnnualTechnologyActivityByMode':['r','t','m','y'],
+            'TotalTechnologyModelPeriodActivity':['r','t'],
+            'ProductionByTechnologyAnnual':['r','t','f','y'],
+            'AnnualTechnologyEmissionByMode':['r','t','e','m','y'],
+            'AnnualTechnologyEmission':['r','t','e','y'],
+            'AnnualEmissions':['r','e','y'],
+            'UseByTechnologyAnnual':['r','t','f','y']
+            }
+
     for each in params:
         df_p = df[df.parameter == each].copy()
-        df_p[cols[each]] = df_p['id'].str.split(',',expand=True)
+        df_p[cols[each]] = df_p['id'].str.split(',', expand=True)
         cols[each].append('value')
         df_p = df_p[cols[each]] # Reorder dataframe to include 'value' as last column
         all_params[each] = pd.DataFrame(df_p) # Create a dataframe for each parameter
-        df_p = df_p.rename(columns={'value':each})
+        df_p = df_p.rename(columns={'value': each})
         df_p.to_csv(str(each) + '.csv', index=None) # Print data for each paramter to a CSV file
         
-
     lines = []
 
     parsing = False
@@ -51,26 +72,25 @@ def main(data_file, pickle_file):
 
     output_table = []
     input_table= []
-    emission_table= []
 
     with open(data_file, 'r') as f:
         for line in f:
             if line.startswith('set YEAR'):
                 start_year = line.split(' ')[3]
-            if line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead. 
+            elif line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead. 
                 fuel_list = line.split(' ')[3:-1]
-            if line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead. 
+            elif line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead. 
                 fuel_list = line.split(' ')[3:-1]
-            if line.startswith('set TECHNOLOGY'):
+            elif line.startswith('set TECHNOLOGY'):
                 tech_list = line.split(' ')[3:-1]
-            if line.startswith('set STORAGE'):
+            elif line.startswith('set STORAGE'):
                 storage_list = line.split(' ')[3:-1]
-            if line.startswith('set EMISSION'):
+            elif line.startswith('set EMISSION'):
                 emission_list = line.split(' ')[3:-1]
-            if line.startswith('set MODE_OF_OPERATION'):
+            elif line.startswith('set MODE_OF_OPERATION'):
                 mode_list = line.split(' ')[3:-1]
 
-                
+    emission_table = []
     # Emission activity ratios-reading them from the data file
     with open(data_file, 'r') as f:
         for line in f:
@@ -227,7 +247,7 @@ def main(data_file, pickle_file):
     #########
     df_ems_ys['EmissionActivityRatio'] = df_ems_ys['EmissionActivityRatio'].astype(float)
     df_ems_ys['YearSplit'] = df_ems_ys['YearSplit'].astype(float)
-    df_activity['RateOfActivity']=df_activity['RateOfActivity'].astype(float)
+    df_activity['RateOfActivity'] = df_activity['RateOfActivity'].astype(float)
     df_ems_ys.set_index(['t','m','y','l'],inplace=True)
     df_antechem=df_activity.join(df_ems_ys, on=['t','m','y','l'])
     #df_antechem is for Annual technology emissions
@@ -267,6 +287,7 @@ if __name__ == '__main__':
         pickle_file = sys.argv[2]
         try:
             main(data_file, pickle_file)
+            sys.exit(0)
         except:
             sys.exit(1)
 
