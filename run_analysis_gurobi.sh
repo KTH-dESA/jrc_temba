@@ -1,11 +1,19 @@
-python scripts/excel_to_osemosys.py input_data TEMBA_03_07_Ref.xlsx
-python scripts/CBC_results_AS_MODEX.py output_data/output.txt
+MODEL_RUN_NAME=TEMBA_09_08_Ref
+DATA_FOLDER=output_data
 
-glpsol -m model/Temba_0406_modex.txt -d output_data/output.txt --wlp output_data/temba.lp --check
+INPUT_FILE=$MODEL_RUN_NAME.xlsx
+
+MODEL_FILE=model/Temba_0406_modex.txt
+
+DATA_FILE=$DATA_FOLDER/$MODEL_RUN_NAME.txt
+LP_FILE=$DATA_FOLDER/$MODEL_RUN_NAME.lp.gz
+GUROBI_FILE=$DATA_FOLDER/$MODEL_RUN_NAME
+
+python scripts/excel_to_osemosys.py input_data $INPUT_FILE $DATA_FILE
+python scripts/CBC_results_AS_MODEX.py $DATA_FILE
+
+glpsol -m $MODEL_FILE -d $DATA_FILE --wlp $LP_FILE --check
 
 # Solve with Gurobi
-gurobi_cl NumericFocus=1 ResultFile=output_data/temba_gur.sol LogFile=output_data/temba_gur.log output_data/temba.lp
-sed '/ * 0/d' output_data/temba_gur.sol >> output_data/temba_gur_nz.sol # Remove zero value items
-
-# wget https://raw.githubusercontent.com/OSeMOSYS/OSeMOSYS_GNU_MathProg/cplex_to_cbc/scripts/convert_cplex_to_cbc.py -O scripts/convert_cplex_to_cbc.py
-# python scripts/convert_cplex_to_cbc.py output_data/temba_sorted.txt output_data/temba_sorted_cbc.txt
+gurobi_cl NumericFocus=1 ResultFile=$GUROBI_FILE.sol LogFile=$GUROBI_FILE.log $LP_FILE
+sed '/ * 0/d' $GUROBI_FILE.sol >> results/$GUROBI_FILE.sol # Remove zero value items
