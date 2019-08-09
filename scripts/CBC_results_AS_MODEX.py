@@ -211,4 +211,7 @@ if __name__ == '__main__':
         sys.exit(1)
     else:
         data_file = sys.argv[1]
-        main(data_file)
+        try:
+            main(data_file)
+        except:
+            sys.exit(1)
