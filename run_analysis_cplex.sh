@@ -10,29 +10,24 @@ DATA_FILE=$DATA_FOLDER/$MODEL_RUN_NAME.txt
 python scripts/excel_to_osemosys.py input_data $INPUT_FILE $DATA_FILE
 python scripts/CBC_results_AS_MODEX.py $INPUT_FILE
 
-glpsol -m $MODEL_FILE -d $DATA_FOLDER/output.txt --wlp $DATA_FOLDER/temba.lp --check
+glpsol -m $MODEL_FILE -d $DATA_FOLDER/$DATA_FILE --wlp $DATA_FOLDER/$MODEL_RUN_NAME.lp.gz --check
 
 # Solve with CPLEX
 rm -f mycplexcommands
 touch mycplexcommands
 
-echo "read $DATA_FOLDER/temba.lp" > mycplexcommands
+echo "read $DATA_FOLDER/$MODEL_RUN_NAME.lp.gz" > mycplexcommands
 echo "optimize" >> mycplexcommands
 echo "write" >> mycplexcommands
-echo "$DATA_FOLDER/temba.sol" >> mycplexcommands
+echo "$DATA_FOLDER/$MODEL_RUN_NAME.sol" >> mycplexcommands
 echo "quit" >> mycplexcommands
 cplex < mycplexcommands
 
-python scripts/transform_31072013.py $DATA_FOLDER/temba.sol $DATA_FOLDER/temba_solution.txt
-sort $DATA_FOLDER/temba_solution.txt -o $DATA_FOLDER/temba_sorted.txt
+python scripts/transform_31072013.py $DATA_FOLDER/$MODEL_RUN_NAME.sol $DATA_FOLDER/$MODEL_RUN_NAME.txt
+sort $DATA_FOLDER/$MODEL_RUN_NAME.txt > $DATA_FOLDER/sorted_$MODEL_RUN_NAME.txt
 
-wget https://raw.githubusercontent.com/OSeMOSYS/OSeMOSYS_GNU_MathProg/cplex_to_cbc/scripts/convert_cplex_to_cbc.py -O scripts/convert_cplex_to_cbc.py
+curl https://raw.githubusercontent.com/OSeMOSYS/OSeMOSYS_GNU_MathProg/master/scripts/convert_cplex_to_cbc.py -o scripts/convert_cplex_to_cbc.py
 
-python scripts/convert_cplex_to_cbc.py $DATA_FOLDER/temba_sorted.txt $DATA_FOLDER/temba_sorted_cbc.txt
+python scripts/convert_cplex_to_cbc.py $DATA_FOLDER/sorted_$MODEL_RUN_NAME.txt results/$MODEL_RUN_NAME.sol
 
-# Solve with CBC
-cbc $DATA_FOLDER/temba.lp -dualpivot pesteep -psi 1.0 -pertv 52 -duals solve -solu $DATA_FOLDER/temba_sorted_cbc.txt
-
-# Solve with Gurobi
-gurobi_cl NumericFocus=1 ResultFile=$DATA_FOLDER/temba_gur.sol LogFile=$DATA_FOLDER/temba_gur.log $DATA_FOLDER/temba.lp
-sed '/ * 0/d' $DATA_FOLDER/temba_gur.sol >> $DATA_FOLDER/temba_gur_nz.sol # Remove zero value items
+python scripts/generate_pickle.py results/$MODEL_RUN_NAME.sol results/$MODEL_RUN_NAME.pickle
