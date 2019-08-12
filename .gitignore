@@ -7,4 +7,14 @@ results/*
 CSVFiles/*
 .ipynb_*
 .vscode
-scripts/convert_cplex_to_cbc.py
+convert_cplex_to_cbc.py
+
+mycplexcommands
+
+*.pickle
+CSVFiles/*
+*.log
+
+input_data/~*
+
+.*
