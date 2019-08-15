@@ -10,6 +10,7 @@ Could use existing CSVFiles melted into narrow dataframes::
                 value_name="EmissionActivityRatio")
 """
 import sys
+import os
 import pandas as pd
 import logging
 import pickle
@@ -45,7 +46,7 @@ def read_cbc_results(data_file):
     return df
 
 
-def main(input_file : str, data_file : str, pickle_file : str, result_format='cbc'):
+def main(input_file : str, data_file : str, pickle_file : str, result_format='gurobi', csv_folder='./'):
     """
 
     Arguments
@@ -62,6 +63,8 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='cb
         df = read_gurobi_results(data_file)
     elif result_format == 'cbc':
         df = read_cbc_results(data_file)
+    else:
+        raise ValueError("Did not understand result_format %s. Must be gurobi or cbc.", result_format)
 
     params = df.parameter.unique()
     all_params = {}
@@ -93,7 +96,10 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='cb
         df_p = df_p[cols[each]] # Reorder dataframe to include 'value' as last column
         all_params[each] = pd.DataFrame(df_p) # Create a dataframe for each parameter
         df_p = df_p.rename(columns={'value': each})
-        df_p.to_csv(str(each) + '.csv', index=None) # Print data for each paramter to a CSV file
+
+        csv_path = os.path.join(csv_folder, str(each)+'.csv')
+
+        df_p.to_csv(csv_path, index=None) # Print data for each paramter to a CSV file
         
     lines = [] # type: List
 
@@ -254,7 +260,9 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='cb
     df_prod = df_prod.groupby(['r','t','f','y'])['ProductionByTechnologyAnnual'].sum().reset_index()
     df_prod['ProductionByTechnologyAnnual'] = df_prod['ProductionByTechnologyAnnual'].astype(float).round(4)
 
-    df_prod.to_csv(r'./ProductionByTechnologyAnnual.csv', index=None)
+    csv_path = os.path.join(csv_folder, 'ProductionByTechnologyAnnual.csv')
+
+    df_prod.to_csv(csv_path, index=None)
     all_params['ProductionByTechnologyAnnual'] = df_prod.rename(columns={'ProductionByTechnologyAnnual':'value'})
 
     # To write Use by technology annual
@@ -278,7 +286,8 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='cb
     df_use = df_use.groupby(['r','t','f','y'])['UseByTechnologyAnnual'].sum().reset_index()
     df_use['UseByTechnologyAnnual'] = df_use['UseByTechnologyAnnual'].astype(float).round(4)
 
-    df_use.to_csv(r'./UseByTechnologyAnnual.csv', index=None)
+    csv_path = os.path.join(csv_folder, 'UseByTechnologyAnnual.csv')
+    df_use.to_csv(csv_path, index=None)
     all_params['UseByTechnologyAnnual'] = df_use.rename(columns={'UseByTechnologyAnnual':'value'})
 
     # To write AnnualTechnologyEmissions
@@ -306,11 +315,14 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='cb
 
     #Annual technology Emission
     df_antechem['AnnualTechnologyEmission'] = df_antechem['AnnualTechnologyEmission'].astype(float).round(4)
-    df_antechem.to_csv(r'./AnnualTechnologyEmission.csv', index=None)
+    csv_path = os.path.join(csv_folder, 'AnnualTechnologyEmission.csv')
+    df_antechem.to_csv(csv_path, index=None)
     all_params['AnnualTechnologyEmission'] = df_antechem.rename(columns={'AnnualTechnologyEmission':'value'})
     #Annual emissions
     df_anemm['AnnualEmissions'] = df_anemm['AnnualEmissions'].astype(float).round(4)
-    df_anemm.to_csv(r'./AnnualEmissions.csv', index=None)
+
+    csv_path = os.path.join(csv_folder, 'AnnualEmissions.csv')
+    df_anemm.to_csv(csv_path, index=None)
     all_params['AnnualEmissions'] = df_anemm.rename(columns={'AnnualEmissions':'value'})
 
     # Removing the rate of activity fromt he results to make the pickle file lighter. 
@@ -325,16 +337,19 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='cb
 
 if __name__ == '__main__':
 
-    if len(sys.argv) != 4:
-        msg = "Usage: python {} <input_file> <CBC or Gurobi solution file> <picklefile>"
+    if len(sys.argv) != 6:
+        msg = "Usage: python {} <input_file> <CBC or Gurobi solution file> <cbc or gurobi> <picklefile> <csv_folder>"
         print(msg.format(sys.argv[0]))
         sys.exit(1)
     else:
+        print(sys.argv)
         input_file = sys.argv[1]
         data_file = sys.argv[2]
-        pickle_file = sys.argv[3]
+        pickle_file = sys.argv[4]
+        file_format = sys.argv[3]
+        csv_folder = sys.argv[5]
         # try:
-        main(input_file, data_file, pickle_file)
+        main(input_file, data_file, pickle_file, file_format, csv_folder)
         # except:
             # sys.exit(1)
         # sys.exit(0)
