@@ -11,16 +11,16 @@ import os
 import sys
 
 
-def main(filepath, input_workbook, output_file):
+def main(input_workbook, output_file):
     """Read the xlsx file
     """
-    csv_from_excel(filepath, input_workbook, output_file)
+    csv_from_excel(input_workbook, output_file)
 
 
-def csv_from_excel(filepath, input_workbook, output_file):
+def csv_from_excel(input_workbook, output_file):
     """Read the workbook and
     """
-    workBook = xlrd.open_workbook(os.path.join(filepath, input_workbook))
+    workBook = xlrd.open_workbook(os.path.join(input_workbook))
     sheetNames = workBook.sheet_names()  # I read all the sheets in the xlsx file
     # I modify the names of the sheets since some do not match with the actual ones
     modifiedSheetNames = modifyNames(sheetNames)
@@ -246,12 +246,12 @@ def modifyNames(sheetNames):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        msg = "Usage: python {} <filepath> <workbook_filename> <output_filepath>"
+    if len(sys.argv) != 3:
+        msg = "Usage: python {} <workbook_filename> <output_filepath>"
         print(msg.format(sys.argv[0]))
         sys.exit(1)
     else:
         try:
-            main(sys.argv[1], sys.argv[2], sys.argv[3])
+            main(sys.argv[1], sys.argv[2])
         except:
             sys.exit(1)
