@@ -13,8 +13,7 @@ rule modify_model_file:
     input:  "output_data/{model_run}.txt"
     output: "output_data/{model_run}_modex.txt"
     shell:
-        "python scripts/CBC_results_AS_MODEX.py {input} & "
-        "cat {input} > {output}"
+        "python scripts/CBC_results_AS_MODEX.py {input} && cat {input} > {output}"
 
 rule generate_lp_file:
     input: "output_data/{model_run}_modex.txt"
@@ -28,7 +27,7 @@ rule solve_lp:
     input: "output_data/{model_run}.lp.gz"
     output: protected("output_data/{model_run}.sol")
     log: "output_data/gurobi_{model_run}.log"
-    threads: 2
+    threads: 4
     shell:
         "gurobi_cl NumericFocus=1 Method=2 Threads={threads} ResultFile={output} ResultFile=output_data/infeasible.ilp LogFile={log} {input}"
 
@@ -39,7 +38,7 @@ rule remove_zero_values:
         "sed '/ * 0$/d' {input} > {output}"
 
 rule generate_pickle:
-    input: "results/{model_run}.sol",modelfile="output_data/{model_run}_modex.txt"
+    input: results="results/{model_run}.sol", modelfile="output_data/{model_run}_modex.txt"
     output: pickle="results/{model_run}.pickle", folder=directory("results/{model_run}")
     shell:
-        "python scripts/generate_pickle.py {input.modelfile}  {input} gurobi {output.pickle} {output.folder}"
+        "mkdir {output.folder} && python scripts/generate_pickle.py {input.modelfile} {input.results} gurobi {output.pickle} {output.folder}"
