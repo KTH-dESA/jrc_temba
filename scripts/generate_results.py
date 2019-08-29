@@ -8,22 +8,13 @@ try:
 	print(os.getcwd())
 except:
 	pass
-#%%
-from IPython import get_ipython
 
-#%% [markdown]
-# ## TEMBA results visualisation Jupyter notebook
-
-#%%
+import shutil
 import os, sys
 import pandas as pd
 import numpy as np
-from IPython.display import HTML
 import ipywidgets as widgets
-from IPython.display import display
-#import matplotlib as plt
 from ipywidgets import interact, interactive, fixed, interact_manual
-#importing plotly and cufflinks in offline mode
 import plotly as py
 import psutil
 import pickle
@@ -39,63 +30,27 @@ from tkinter import filedialog
 from tkinter import *
 homedir=os.getcwd()
 
+picklefile = sys.argv[1]
+scenario = sys.argv[2]
+
+pkl_file = open(picklefile, 'rb')
+# The pickle file is loaded onto the all_params dictionary
+all_params = pickle.load(pkl_file)
 
 
-#%%
-# Interactive widget for choosing the results to visualise
-from glob import glob
-
-# Extract the result files from those stored in the directory
-options = [(x.split(".pickle")[0], x) for x in glob('*.pickle')]
-
-# Build a dropdown widget to select the results you wish to view
-result_dropdown = widgets.Dropdown(
-    options=options,
-    description='Select TEMBA results to view:',
-)
-
-def update_results(change):
-    """Handles the change in the dropdown menu to select the pickle file and scenario
-    """
-    global all_params
-    # The pickle file for the corressponding powerpool/TEMBA is unbundled in the following steps
-    picklefile=change['new']
-    pkl_file = open(picklefile, 'rb')
-    # The pickle file is loaded onto the all_params dictionary
-    all_params = pickle.load(pkl_file)
-    
-    #Automatic naming of scenarios based on pickle file selection
-    #global scenario
-    #scen_name=change['new']
-    #scenario=scen_name.split('pickle')[0]
-
-result_dropdown.observe(update_results, names='value')
-
-#%% [markdown]
-# # Please select the power-pool or TEMBA results that you want to visualize
-
-#%%
-display(result_dropdown)
-
-
-#%%
-scenario=input('Enter scenario name:')
-
-
-#%%
 #Fundamental dictionaries that govern naming and colour coding
 url1='./agg_col.csv'
 url2='./agg_pow_col.csv'
 url3='./countrycode.csv'
 url4='./power_tech.csv'
 url5='./techcodes.csv'
-colorcode=pd.read_csv(url5,sep=',',encoding = "ISO-8859-1")
-colorcode1=colorcode.drop('colour',axis=1)
-colorcode2=colorcode.drop('tech_code',axis=1)
+colorcode=pd.read_csv(url5,sep=',', encoding = "ISO-8859-1")
+colorcode1=colorcode.drop('colour', axis=1)
+colorcode2=colorcode.drop('tech_code', axis=1)
 det_col=dict([(a,b) for a,b in zip(colorcode1.tech_code,colorcode1.tech_name)])
-color_dict=dict([(a,b) for a,b in zip(colorcode2.tech_name,colorcode2.colour)])
-agg1=pd.read_csv(url1,sep=',',encoding = "ISO-8859-1")
-agg2=pd.read_csv(url2,sep=',',encoding = "ISO-8859-1")
+color_dict = dict([(a, b) for a, b in zip(colorcode2.tech_name, colorcode2.colour)])
+agg1=pd.read_csv(url1, sep=',', encoding = "ISO-8859-1")
+agg2=pd.read_csv(url2, sep=',', encoding = "ISO-8859-1")
 agg_col=agg1.to_dict('list')
 agg_pow_col=agg2.to_dict('list')
 power_tech=pd.read_csv(url4,sep=',',encoding = "ISO-8859-1")
@@ -106,14 +61,14 @@ country_code=pd.read_csv(url3,sep=',',encoding = "ISO-8859-1")
 
 #%%
 # time period definition
-years = pd.Series(range(2015,2071))
+years = pd.Series(range(2015, 2071))
 #home directory for any image/CSV creation
 homedir=os.getcwd()
 
 
-#%%
-#base function used for many different variables (mainly cost)
 def df_filter(df,lb,ub,t_exclude):
+    """base function used for many different variables (mainly cost)
+    """
     df['t'] = df['t'].str[lb:ub]
     df['value'] = df['value'].astype('float64')
     df = df[~df['t'].isin(t_exclude)].pivot_table(index='y', 
@@ -124,8 +79,11 @@ def df_filter(df,lb,ub,t_exclude):
     df['y'] = years
     #df=df[df['y']>2018]
     return df
-#### PLotting function for all graphs except Gas (as it needs relative charts)
+
+
 def df_plot(df,y_title,p_title):
+    """Plotting function for all graphs except Gas (as it needs relative charts)
+    """
     if len(df.columns)==1:
         print('There are no values for the result variable that you want to plot')
     else:
@@ -141,9 +99,11 @@ def df_plot(df,y_title,p_title):
         fig.update_xaxes(range=[2015,2065]) 
         pio.write_image(fig, '{}.png'.format(p_title))
         df.to_csv(os.path.join(homedir,p_title+"-"+scenario+".csv"))
-        return iplot(fig)
-#### Emissions#####
+        return None
+
 def df_filter_emission_tech(df,lb,ub):
+    """Emissions
+    """
     df['t'] = df['t'].str[lb:ub]
     df['e'] = df['e'].str[2:5]
     df['value'] = df['value'].astype('float64')
@@ -154,8 +114,10 @@ def df_filter_emission_tech(df,lb,ub):
     df['y'] = years
     #df=df[df['y']>2018]
     return df
-### Annual Emissions
+
 def df_filter_emission_tot(df):
+    """Annual Emissions
+    """
     df['e'] = df['e'].str[2:5]
     df['value'] = df['value'].astype('float64')
     df = df.pivot_table(index='y',columns='e',
@@ -167,7 +129,6 @@ def df_filter_emission_tot(df):
     return df
 
 
-#%%
 def power_chart(Country):
     cc=country_code[country_code['Country Name']==Country]['Country code'].tolist()[0]
     #print('The country code is:'+cc)
@@ -284,11 +245,9 @@ def power_chart(Country):
     title=(cc+"-"+"Power Generation (Aggregate)")
     pio.write_image(fig, '{}.png'.format(title+"-"+scenario))
     gen_agg_df.to_csv(os.path.join(homedir,cc+"-"+"Power Generation (Aggregate)"+"-"+scenario+".csv"))
-    return iplot(fig)
+    return None
     
 
-
-#%%
 def water_chart (Country):
     cc=country_code[country_code['Country Name']==Country]['Country code'].tolist()[0]
     #print('The country code is:'+cc)
@@ -438,50 +397,54 @@ def gas_chart(Country):
         title=(cc+"-"+"Gas extraction, imports and exports")
         pio.write_image(fig, '{}.png'.format(title+"-"+scenario),width=1300,height=800)
         gas_df.to_csv(os.path.join(homedir,cc+"-"+"Gas extraction, imports and exports"+"-"+scenario+".csv"))
-        return iplot(fig)
+        return None
 
 
 #%%
 def crude_chart(Country):
-    cc=country_code[country_code['Country Name']==Country]['Country code'].tolist()[0]
+    cc = country_code[country_code['Country Name']==Country]['Country code'].tolist()[0]
     #Crude oil refined in the country
     cru_r_df = all_params['ProductionByTechnologyAnnual']
-    cru_r_df=cru_r_df[cru_r_df['f'].str[:6]==cc+'CRU2'].copy()
+    cru_r_df = cru_r_df[cru_r_df['f'].str[:6]==cc+'CRU2'].copy()
     cru_r_df['t'] = cru_r_df['t'].str[2:10]
     cru_r_df['value'] = cru_r_df['value'].astype('float64')
-    cru_r_df = cru_r_df.pivot_table(index='y',columns='t',
-                                      values='value', 
-                                      aggfunc='sum').reset_index().fillna(0)
+    cru_r_df = cru_r_df.pivot_table(index='y', columns='t',
+                                    values='value', 
+                                    aggfunc='sum').reset_index().fillna(0)
     cru_r_df = cru_r_df.reindex(sorted(cru_r_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
     #cru_r_df['y'] = years
     #cru_r_df=cru_r_df[cru_r_df['y']>2018]
-    df_plot(cru_r_df,'Petajoules (PJ)',cc+'-'+'Crude oil refined in the country')
+    df_plot(cru_r_df, 'Petajoules (PJ)', cc + '-' + 'Crude oil refined in the country')
     #Crude oil production/imports/exports (Detailed)
     cru_df = all_params['ProductionByTechnologyAnnual']
-    cru_df=cru_df[(cru_df['f'].str[:6]==cc+'CRU1')].copy()
+    cru_df=cru_df[(cru_df['f'].str[:6] == cc + 'CRU1')].copy()
     cru_df['t'] = cru_df['t'].str[2:10]
     cru_df['value'] = cru_df['value'].astype('float64')
     cru_df['t'] = cru_df['t'].astype(str)
-    cru_df = cru_df.pivot_table(index='y',columns='t',
+    cru_df = cru_df.pivot_table(index='y', columns='t',
                                       values='value', 
                                       aggfunc='sum').reset_index().fillna(0)
     cru_df = cru_df.reindex(sorted(cru_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
     #cru_df['y'] = years
     #cru_df=cru_df[cru_df['y']>2018]
-    fig=cru_df.iplot(x='y',
-                  kind='bar', 
-                  barmode='relative',
-                  xTitle='Year',
-                  yTitle="Petajoules (PJ)",
-                  color=[color_dict[x] for x in cru_df.columns if x != 'y'],
-                  title=cc+"-"+"Crude oil extraction, imports and exports"+"-"+scenario,
-                  showlegend=True,
-                  asFigure=True)
-    fig.update_xaxes(range=[2015,2065]) 
-    title=(cc+"-"+"Crude oil extraction, imports and exports")
-    pio.write_image(fig, '{}.png'.format(title+"-"+scenario))
-    cru_df.to_csv(os.path.join(homedir,cc+"-"+"Crude oil extraction, imports and exports"+"-"+scenario+".csv"))
-    return iplot(fig)
+    try:
+        fig=cru_df.iplot(x='y',
+                         kind='bar', 
+                         barmode='relative',
+                         xTitle='Year',
+                         yTitle="Petajoules (PJ)",
+                         color=[color_dict[x] for x in cru_df.columns if x != 'y'],
+                         title=cc + "-" + "Crude oil extraction, imports and exports"+"-"+scenario,
+                         showlegend=True,
+                         asFigure=True)
+        fig.update_xaxes(range=[2015,2065]) 
+        title=(cc+"-"+"Crude oil extraction, imports and exports")
+        pio.write_image(fig, '{}.png'.format(title+"-"+scenario))
+        cru_df.to_csv(os.path.join(homedir,cc+"-"+"Crude oil extraction, imports and exports"+"-"+scenario+".csv"))
+    except KeyError:
+        print("No data for the crude plot")
+
+    return None
     
 
 
@@ -542,99 +505,68 @@ def hfo_lfo_chart(Country):
     #lfo_df=lfo_df[lfo_df['y']>2018]
     df_plot(lfo_df,'Petajoules (PJ)',cc+'-'+'LFO production by technology')
 
-#%% [markdown]
-# # CHOOSE THE COUNTRY TO VISUALIZE
+for ref_y in [2010, 2020, 2030, 2040, 2050, 2060, 2070]:
 
-#%%
-country = widgets.Dropdown(options=country_code['Country Name'])
-display(country)
-
-
-#%%
-power_chart(country.value)
-water_chart(country.value)
-emissions_chart(country.value)
-gas_chart(country.value)
-crude_chart(country.value)
-coal_biomass_chart(country.value)
-hfo_lfo_chart(country.value)
-
-#%% [markdown]
-# # The following code will produce the data necessary for electricity generation charts (bar graphs) for all countries in a specific year 
-#%% [markdown]
-# ## Please provide the year of your choice
-
-#%%
-ref_y=input("Please specify the year: ")
-ref_y=int(ref_y)
-
-
-#%%
-get_ipython().run_line_magic('config', "InlineBackend.figure_format ='retina'")
-# Input the year to be visualised
-
-# taking the country codes from temba_dict
-ccs=country_code['Country code'].values
-total_df=[]
-for cc in ccs:
-    gen_df = all_params['ProductionByTechnologyAnnual'].copy()
-    gen_df_export=gen_df[(gen_df['f'].str[2:6]=='EL01')&(gen_df['f'].str[0:2]!=cc)].copy()
-    gen_df_export=gen_df_export[gen_df_export['t'].str[6:10]=='BP00'].copy()
-    gen_df_export=gen_df_export[(gen_df_export['t'].str[0:2]==cc)|(gen_df_export['t'].str[4:6]==cc)]
-    gen_df_export['value'] = gen_df_export['value'].astype(float)*-1
-    gen_df=gen_df[(gen_df['f'].str[:2]==cc)].copy()
-    gen_df=gen_df[(gen_df['f'].str[2:6]=='EL01')|(gen_df['f'].str[2:6]=='EL03')].copy()
-    gen_df=gen_df[(gen_df['t'].str[2:10]!='EL00T00X')&(gen_df['t'].str[2:10]!='EL00TDTX')].copy()
-    gen_df=pd.concat([gen_df,gen_df_export])
-    gen_df['value'] = gen_df['value'].astype('float64')
-    gen_df = gen_df.pivot_table(index='y', 
-                                           columns='t',
-                                           values='value', 
-                                           aggfunc='sum').reset_index().fillna(0)
-    for each in gen_df.columns:
-        if len(each)!=1:
-            if (each[2:4]=='EL') & (each[6:10]=='BP00'):
-                pass
+    ccs=country_code['Country code'].values
+    total_df=[]
+    for cc in ccs:
+        gen_df = all_params['ProductionByTechnologyAnnual'].copy()
+        gen_df_export=gen_df[(gen_df['f'].str[2:6]=='EL01')&(gen_df['f'].str[0:2]!=cc)].copy()
+        gen_df_export=gen_df_export[gen_df_export['t'].str[6:10]=='BP00'].copy()
+        gen_df_export=gen_df_export[(gen_df_export['t'].str[0:2]==cc)|(gen_df_export['t'].str[4:6]==cc)]
+        gen_df_export['value'] = gen_df_export['value'].astype(float)*-1
+        gen_df=gen_df[(gen_df['f'].str[:2]==cc)].copy()
+        gen_df=gen_df[(gen_df['f'].str[2:6]=='EL01')|(gen_df['f'].str[2:6]=='EL03')].copy()
+        gen_df=gen_df[(gen_df['t'].str[2:10]!='EL00T00X')&(gen_df['t'].str[2:10]!='EL00TDTX')].copy()
+        gen_df=pd.concat([gen_df,gen_df_export])
+        gen_df['value'] = gen_df['value'].astype('float64')
+        gen_df = gen_df.pivot_table(index='y', 
+                                            columns='t',
+                                            values='value', 
+                                            aggfunc='sum').reset_index().fillna(0)
+        for each in gen_df.columns:
+            if len(each)!=1:
+                if (each[2:4]=='EL') & (each[6:10]=='BP00'):
+                    pass
+                else:
+                    gen_df.rename(columns={each:each[2:10]},inplace=True)
             else:
-                gen_df.rename(columns={each:each[2:10]},inplace=True)
-        else:
-            pass
-    gen_df = gen_df.reindex(sorted(gen_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
-    #gen_df['y'] = years
-    #gen_df=gen_df[gen_df['y']>2018]
-    #df_plot(gen_df,'Petajoules (PJ)',cc+"-"+'Power Generation (Detail)')
-    #####
-    # Power generation (Aggregated)
-    gen_agg_df = pd.DataFrame(columns=agg_pow_col)
-    gen_agg_df.insert(0,'y',gen_df['y'])
-    gen_agg_df  = gen_agg_df.fillna(0.00)
-    for each in agg_pow_col:
-        for tech_exists in agg_pow_col[each]:
-            if tech_exists in gen_df.columns:
-                gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
-                gen_agg_df[each] = gen_agg_df[each].round(2)
-#     gen_agg_df.iplot(x='y',
-#                      kind='bar', 
-#                      barmode='relative',
-#                      xTitle='Year',
-#                      yTitle="Petajoules (PJ)",
-#                      color=[color_dict[x] for x in gen_agg_df.columns if x != 'y'],
-#                      title=cc+"-"+"Power Generation (Aggregate)")
-    gen_agg_df['Total']= gen_agg_df['Coal']+gen_agg_df['Oil']+gen_agg_df['Gas']+gen_agg_df['Hydro']+gen_agg_df['Nuclear']+gen_agg_df['Solar CSP']+gen_agg_df['Solar PV']+gen_agg_df['Wind']+gen_agg_df['Biomass']+gen_agg_df['Geothermal']+gen_agg_df['Backstop']+gen_agg_df['power_trade']
-    gen_agg_df['CCC']=cc
-    gen_agg_df=gen_agg_df[gen_agg_df['y']==ref_y].copy()
-    total_df.append(gen_agg_df)
-    #df_plot(gen_agg_df,'Petajoules (PJ)',cc+"-"+'Power Generation (Aggregate)')
-total_df= pd.concat(total_df,ignore_index=True)
-total_df=total_df.drop('y',axis=1)
-total_df=total_df.drop('Total',axis=1)
-total_df=total_df.drop('gas_trade',axis=1,)
-# The csv file will be created in the home folder.
-ref_y=str(ref_y)
-total_df.to_csv(os.path.join(homedir,ref_y+"-generation"+"-"+scenario+".csv"),index=None)
+                pass
+        gen_df = gen_df.reindex(sorted(gen_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
+        #gen_df['y'] = years
+        #gen_df=gen_df[gen_df['y']>2018]
+        #df_plot(gen_df,'Petajoules (PJ)',cc+"-"+'Power Generation (Detail)')
+        #####
+        # Power generation (Aggregated)
+        gen_agg_df = pd.DataFrame(columns=agg_pow_col)
+        gen_agg_df.insert(0,'y',gen_df['y'])
+        gen_agg_df  = gen_agg_df.fillna(0.00)
+        for each in agg_pow_col:
+            for tech_exists in agg_pow_col[each]:
+                if tech_exists in gen_df.columns:
+                    gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
+                    gen_agg_df[each] = gen_agg_df[each].round(2)
+    #     gen_agg_df.iplot(x='y',
+    #                      kind='bar', 
+    #                      barmode='relative',
+    #                      xTitle='Year',
+    #                      yTitle="Petajoules (PJ)",
+    #                      color=[color_dict[x] for x in gen_agg_df.columns if x != 'y'],
+    #                      title=cc+"-"+"Power Generation (Aggregate)")
+        gen_agg_df['Total'] = gen_agg_df['Coal']+gen_agg_df['Oil']+gen_agg_df['Gas']+gen_agg_df['Hydro']+gen_agg_df['Nuclear']+gen_agg_df['Solar CSP']+gen_agg_df['Solar PV']+gen_agg_df['Wind']+gen_agg_df['Biomass']+gen_agg_df['Geothermal']+gen_agg_df['Backstop']+gen_agg_df['power_trade']
+        gen_agg_df['CCC'] = cc
+        gen_agg_df = gen_agg_df[gen_agg_df['y'] == ref_y].copy()
+        total_df.append(gen_agg_df)
+        #df_plot(gen_agg_df,'Petajoules (PJ)',cc+"-"+'Power Generation (Aggregate)')
+    total_df= pd.concat(total_df,ignore_index=True)
+    total_df=total_df.drop('y',axis=1)
+    total_df=total_df.drop('Total',axis=1)
+    total_df=total_df.drop('gas_trade',axis=1,)
+    # The csv file will be created in the home folder.
+    ref_y = str(ref_y)
+    total_df.to_csv(os.path.join(homedir, ref_y + "-generation" + "-" + scenario + ".csv"), index=None)
 
 
-#%%
 # Dictionary for the powerpool classifications and countries
 pp_def={'CAPP':['CM','CF','TD','CG','CD','GQ','GA'],
 'EAPP':['BI','DJ','ER','ET','KE','RW','SO','SD','TZ','UG','EG','SS'],
@@ -645,10 +577,10 @@ pp_def={'CAPP':['CM','CF','TD','CG','CD','GQ','GA'],
                     'AO','BW','LS','MW','MZ','NM','ZA','SZ','ZM','ZW',
                     'BJ','BF','CI','GM','GH','GN','GW','LR','ML','NE','NG','SN','SL','TG','CM','CF','TD','CG','CD','GQ','GA','SS']}
 
-#%% [markdown]
+
 # # In the follwoing block, the capacity and generation graphs for all the powerpools and TEMBA will be plotted and CSV files generated
 
-#%%
+
 # first for loop to loop over the major dictionary keys 
 for tk in pp_def.keys():
     # The following lines are used for creating dummy 
@@ -920,16 +852,16 @@ for tk in pp_def.keys():
 #%%
 #Cosnsolidated coal and bioamss usage
 for tk in pp_def.keys():
-    total_coal_df=pd.DataFrame(np.zeros(shape=(56,3)),columns=['y','Coal imports (inland transport, maritime freight)','Coal extraction (mining)'],dtype='float64')
+    total_coal_df = pd.DataFrame(np.zeros(shape=(56,3)),columns=['y','Coal imports (inland transport, maritime freight)','Coal extraction (mining)'],dtype='float64')
     total_coal_df['y'] = total_coal_df['y'].astype('float64')
-    total_coal_df['y']=years
+    total_coal_df['y'] = years
     total_biom_df=pd.DataFrame(np.zeros(shape=(56,2)),columns=['y','Biomass extraction/production/refining'],dtype='float64')
     total_biom_df['y'] = total_biom_df['y'].astype('float64')
-    total_biom_df['y']=years
+    total_biom_df['y'] = years
     for cc in pp_def[tk]:
         #Coal overview
         coal_df = all_params['ProductionByTechnologyAnnual']
-        coal_df=coal_df[coal_df['f'].str[:6]==cc+'COAL'].copy()
+        coal_df = coal_df[coal_df['f'].str[:6]==cc+'COAL'].copy()
         coal_df['t'] = coal_df['t'].str[2:10]
         coal_df['value'] = coal_df['value'].astype('float64')
         coal_df = coal_df.pivot_table(index='y',columns='t',
@@ -937,16 +869,16 @@ for tk in pp_def.keys():
                                   aggfunc='sum').reset_index().fillna(0)
         coal_df = coal_df.reindex(sorted(coal_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
         if len(coal_df.columns)==1:
-            coal_df=pd.DataFrame(np.zeros(shape=(56,3)),columns=['y','Coal imports (inland transport, maritime freight)','Coal extraction (mining)'],dtype='float64')
-            coal_df['y']=years
-        total_coal_df= total_coal_df.set_index('y').add(coal_df.set_index('y'), fill_value=0).reset_index()
+            coal_df = pd.DataFrame(np.zeros(shape=(56,3)),columns=['y','Coal imports (inland transport, maritime freight)','Coal extraction (mining)'],dtype='float64')
+            coal_df['y'] = years
+        total_coal_df = total_coal_df.set_index('y').add(coal_df.set_index('y'), fill_value=0).reset_index()
         #total_coal_df=coal_df+total_coal_df
         #coal_df['y'] = years
         #coal_df=coal_df[coal_df['y']>2018]
         
         #Biomass overview
         biom_df = all_params['ProductionByTechnologyAnnual']
-        biom_df=biom_df[biom_df['f'].str[:6]==cc+'BIOM'].copy()
+        biom_df = biom_df[biom_df['f'].str[:6]==cc+'BIOM'].copy()
         biom_df['t'] = biom_df['t'].str[2:10]
         biom_df['value'] = biom_df['value'].astype('float64')
         biom_df = biom_df.pivot_table(index='y',columns='t',
@@ -956,12 +888,12 @@ for tk in pp_def.keys():
         total_biom_df= total_biom_df.set_index('y').add(biom_df.set_index('y'), fill_value=0).reset_index()
         #biom_df['y'] = years
         #biom_df=biom_df[biom_df['y']>2018]
-    total_coal_df['y']=years
-    total_biom_df['y']=years
+    total_coal_df['y'] = years
+    total_biom_df['y'] = years
     total_coal_df=total_coal_df[total_coal_df['y']<=2065]
     total_biom_df=total_biom_df[total_biom_df['y']<=2065]
-    df_plot(total_biom_df,'Petajoules (PJ)',tk+'-'+'Biomass production by technology')
-    df_plot(total_coal_df,'Petajoules (PJ)',tk+'-'+'Coal production by technology')
+    df_plot(total_biom_df, 'Petajoules (PJ)', tk + '-' + 'Biomass production by technology')
+    df_plot(total_coal_df, 'Petajoules (PJ)', tk + '-' + 'Coal production by technology')
 
 
 for each in country_code['Country Name']:
@@ -975,28 +907,26 @@ for each in country_code['Country Name']:
 
 # this block will create individual country folders and paste (all country specific csv and png files) 
 #files from the home directory to the path mentioned below
-import shutil
-import os
-resultpath=r'C:\Users\vsri\Box Sync\dESA\06 Projects\2018-12_JRC_TEMBA\03. Work\02. Modelling\Python script_Ioannis\Final_results_dissemination_Aug2019\2308_runs\reference\country'
+
+resultpath = os.path.join('reference', 'country')
 source = homedir
 files = os.listdir(source)
 for each in country_code['Country code']:
-    os.mkdir(resultpath+ '/'+ each)
-    dest1 = r'C:\Users\vsri\Box Sync\dESA\06 Projects\2018-12_JRC_TEMBA\03. Work\02. Modelling\Python script_Ioannis\Final_results_dissemination_Aug2019\2308_runs\reference\country' + "/" + each
+    os.makedirs(os.path.join(resultpath, each), exist_ok=True)
+    dest1 = os.path.join('reference','country', each)
     for f in files:
         if (f.startswith(each)):
             shutil.move(f, dest1)
      
-
 # this block will create individual Power pool folders and paste (all country specific csv and png files) 
 #files from the home directory to the path mentioned below
 power_p=['WAPP','EAPP','CAPP','NAPP','SAPP']
-resultpath=r'C:\Users\vsri\Box Sync\dESA\06 Projects\2018-12_JRC_TEMBA\03. Work\02. Modelling\Python script_Ioannis\Final_results_dissemination_Aug2019\2308_runs\reference\power_pool'
+resultpath = os.path.join('reference', 'powerpool')
 source = homedir
 files = os.listdir(source)
 for en in power_p:
-    os.mkdir(resultpath+ '/'+ en)
-    dest2 = r'C:\Users\vsri\Box Sync\dESA\06 Projects\2018-12_JRC_TEMBA\03. Work\02. Modelling\Python script_Ioannis\Final_results_dissemination_Aug2019\2308_runs\reference\power_pool' + "/" + en
+    os.makedirs(os.path.join(resultpath, en), exist_ok=True)
+    dest2 = os.path.join(resultpath, en)
     for f in files:
         if (f.startswith(en)):
             shutil.move(f, dest2)
