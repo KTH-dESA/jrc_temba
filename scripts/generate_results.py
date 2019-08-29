@@ -427,28 +427,25 @@ def crude_chart(Country):
     cru_df = cru_df.reindex(sorted(cru_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
     #cru_df['y'] = years
     #cru_df=cru_df[cru_df['y']>2018]
-    try:
+    if len(cru_df.columns)==1:
+                print('There are no values for the result variable that you want to plot')
+    else:
         fig=cru_df.iplot(x='y',
                          kind='bar', 
                          barmode='relative',
                          xTitle='Year',
                          yTitle="Petajoules (PJ)",
                          color=[color_dict[x] for x in cru_df.columns if x != 'y'],
-                         title=cc + "-" + "Crude oil extraction, imports and exports"+"-"+scenario,
+                         title=cc+"-"+"Crude oil extraction, imports and exports"+"-"+scenario,
                          showlegend=True,
                          asFigure=True)
         fig.update_xaxes(range=[2015,2065]) 
         title=(cc+"-"+"Crude oil extraction, imports and exports")
         pio.write_image(fig, '{}.png'.format(title+"-"+scenario))
         cru_df.to_csv(os.path.join(homedir,cc+"-"+"Crude oil extraction, imports and exports"+"-"+scenario+".csv"))
-    except KeyError:
-        print("No data for the crude plot")
-
     return None
-    
 
 
-#%%
 def coal_biomass_chart(Country):
     cc=country_code[country_code['Country Name']==Country]['Country code'].tolist()[0]
     #Coal overview
