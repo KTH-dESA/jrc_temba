@@ -1,53 +1,51 @@
-# To add a new cell, type '#%%'
-# To add a new markdown cell, type '#%% [markdown]'
-#%% Change working directory from the workspace root to the ipynb file location. Turn this addition off with the DataScience.changeDirOnImportExport setting
-# ms-python.python added
-import os
-try:
-	os.chdir(os.path.join(os.getcwd(), 'scripts'))
-	print(os.getcwd())
-except:
-	pass
+"""
 
+Arguments
+---------
+picklefile : str
+    The filepath to the results file for which to produce plots 
+    and data csv files
+scenario : str
+    A short and descriptive scenario name (appears in plot titles)
+homedir : str
+    Root directory to which plots and csv files are copied
+
+"""
 import shutil
-import os, sys
+import os
+import sys
 import pandas as pd
 import numpy as np
-import ipywidgets as widgets
-from ipywidgets import interact, interactive, fixed, interact_manual
-import plotly as py
-import psutil
 import pickle
-import plotly.graph_objs as go
 import plotly.io as pio
 import cufflinks
 import plotly.offline as pyo
-from plotly.offline import plot, iplot, init_notebook_mode
 pyo.init_notebook_mode()
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme='white')
-from tkinter import filedialog
-from tkinter import *
-homedir=os.getcwd()
 
 picklefile = sys.argv[1]
 scenario = sys.argv[2]
+homedir = sys.argv[3]
 
 pkl_file = open(picklefile, 'rb')
 # The pickle file is loaded onto the all_params dictionary
 all_params = pickle.load(pkl_file)
 
 
-#Fundamental dictionaries that govern naming and colour coding
-url1='./agg_col.csv'
-url2='./agg_pow_col.csv'
-url3='./countrycode.csv'
-url4='./power_tech.csv'
-url5='./techcodes.csv'
-colorcode=pd.read_csv(url5,sep=',', encoding = "ISO-8859-1")
-colorcode1=colorcode.drop('colour', axis=1)
-colorcode2=colorcode.drop('tech_code', axis=1)
-det_col=dict([(a,b) for a,b in zip(colorcode1.tech_code,colorcode1.tech_name)])
+# Fundamental dictionaries that govern naming and colour coding
+data_dir = 'input_data'
+
+url1 = os.path.join(data_dir, 'agg_col.csv')
+url2 = os.path.join(data_dir, 'agg_pow_col.csv')
+url3 = os.path.join(data_dir, 'countrycode.csv')
+url4 = os.path.join(data_dir, 'power_tech.csv')
+url5 = os.path.join(data_dir, 'techcodes.csv')
+
+colorcode = pd.read_csv(url5, sep=',', encoding="ISO-8859-1")
+colorcode1 = colorcode.drop('colour', axis=1)
+colorcode2 = colorcode.drop('tech_code', axis=1)
+det_col = dict([(a,b) for a,b in zip(colorcode1.tech_code,colorcode1.tech_name)])
 color_dict = dict([(a, b) for a, b in zip(colorcode2.tech_name, colorcode2.colour)])
 agg1=pd.read_csv(url1, sep=',', encoding = "ISO-8859-1")
 agg2=pd.read_csv(url2, sep=',', encoding = "ISO-8859-1")
@@ -58,13 +56,7 @@ t_include = list(power_tech['power_tech'])
 #Country code list
 country_code=pd.read_csv(url3,sep=',',encoding = "ISO-8859-1")
 
-
-#%%
-# time period definition
 years = pd.Series(range(2015, 2071))
-#home directory for any image/CSV creation
-homedir=os.getcwd()
-
 
 def df_filter(df,lb,ub,t_exclude):
     """base function used for many different variables (mainly cost)
@@ -81,7 +73,7 @@ def df_filter(df,lb,ub,t_exclude):
     return df
 
 
-def df_plot(df,y_title,p_title):
+def df_plot(df, y_title, p_title):
     """Plotting function for all graphs except Gas (as it needs relative charts)
     """
     if len(df.columns)==1:
@@ -138,10 +130,11 @@ def power_chart(Country):
     cap_df=cap_df[cap_df['t'].str[:2]==cc].copy()
     cap_df['t'] = cap_df['t'].str[2:10]
     cap_df['value'] = cap_df['value'].astype('float64')
-    cap_df = cap_df[cap_df['t'].isin(t_include)].pivot_table(index='y', 
-                                               columns='t',
-                                               values='value', 
-                                               aggfunc='sum').reset_index().fillna(0)
+    cap_df = cap_df[cap_df['t'].isin(t_include)].pivot_table(
+        index='y', 
+        columns='t',
+        values='value', 
+        aggfunc='sum').reset_index().fillna(0)
     cap_df = cap_df.reindex(sorted(cap_df.columns), axis=1).set_index('y').reset_index().rename(columns=det_col)
     #cap_df['y'] = years
     #cap_df=cap_df[cap_df['y']>2018]
