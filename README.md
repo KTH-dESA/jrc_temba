@@ -36,3 +36,13 @@ number of threads to use e.g. `snakemake -j 8`.
 - Data is released under the terms of a CC-BY 4.0 License Agreement.
 - A modified copy of OSeMOSYS is redistribruted in this repository under Apache 2.0 license agreement, 
   a copy of which can be found in the `model` folder
+
+## Citation
+
+If you wish to use, extend or otherwise build upon the work contained within this repository, you are
+welcome to do so, provided you abide by the terms of the licenses detailed above.
+
+Please cite this work in the following manner:
+
+    Pappis, I., Howells, M., Sridharan, V., Usher, W., Shivakumar, A., Gardumi, F., Ramos, E., 2019,
+    Energy demand projections for African countries: The Energy Model Base for Africa (TEMBA)
