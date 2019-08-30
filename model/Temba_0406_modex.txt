@@ -2,6 +2,9 @@
 #
 # Open Source energy MOdeling SYStem
 #
+# This version used for JRC TEMBA has been modified by commenting out many of the ununused
+# variables and constraints to reduce the model size
+#
 # Main changes to previous version Commit 2
 #       - Correction of Storage section in objective function (consideration of DiscountedSalvageValueStorage)
 #		- Hashed in var DiscountedSalvageValueStorage

@@ -30,3 +30,9 @@ number of threads to use e.g. `snakemake -j 8`.
 - Temporary output data is stored in the `output_data` folder
 - Final results are stored in `results`
 - All the scripts for intermediate processing are stored in the `scripts` folder
+
+## Licensing
+
+- Data is released under the terms of a CC-BY 4.0 License Agreement.
+- A modified copy of OSeMOSYS is redistribruted in this repository under Apache 2.0 license agreement, 
+  a copy of which can be found in the `model` folder
