@@ -696,7 +696,7 @@ with tempfile.TemporaryDirectory() as temp:
                     if tech_exists in gen_df.columns:
                         gen_agg_df[each] = gen_agg_df[each] + gen_df[tech_exists]
                         gen_agg_df[each] = gen_agg_df[each].round(2)
-            total_gen_df = gen_agg_df+total_gen_df
+            total_gen_df = gen_agg_df + total_gen_df
         total_gen_df['y'] = years
         total_gen_df['y'] = total_gen_df['y'].astype('float64')
         total_cap_df['y'] = total_cap_df['y'].astype('float64')
