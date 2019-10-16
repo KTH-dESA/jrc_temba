@@ -1,1 +1,4 @@
 The emission factor (CO2) in NG pipelines is assigned as negative to the technologies/pipelines of the exported country (XXNGXXBP00) and as positive to the imported countries (XXNG00IPIX)
+The capacity factors of the old thermal power plants are 5% less than the new corresponding power plants
+The old thermal power plants will generate at least 20% of their capacity until they are phased out of the system. This has been modelled using the TotalTechnologyAnnualActivityLowerLimit.
+The existing LNG terminals can not export more than their generation/capacity (the totalannualactivityuperlimit was used)
