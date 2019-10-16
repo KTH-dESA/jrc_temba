@@ -1,0 +1,40 @@
+code (Old),code (New),Description,Group,Colour
+ETHA,ETH,Ethanol fuel,Primary level fuel,aliceblue
+CRU1,CO1,Crude oil fuel,Primary level fuel,aqua
+CRU2,CO2,Crude oil fuel - processed,Primary level fuel,azure
+BIOM,BIO,Biomass fuel,Primary level fuel,bisque
+COAL,COA,Coal fuel,Primary level fuel,blanchedalmond
+LFOI,LFO,Light Fuel Oil fuel,Primary level fuel,bluegray
+GASF,GAS,Gas fuel,Primary level fuel,blueviolet
+HFOI,HFO,Heavy Fuel Oil fuel,Primary level fuel,brightblue
+SOLA,SOL,Solar potential,Primary level fuel,brown
+WIND,WIN,Wind potential,Primary level fuel,cadetblue
+URAN,URN,Uranium fuel,Primary level fuel,chartreuse
+CHAR,CHA,Charcoal fuel,Primary level fuel,coral
+WAT1,WA1,Water withdrawal fuel,Water,cornsilk
+WAT2,WA2,Water consumption fuel,Water,cyan
+EL01,EL1,Electricity from power plants,Secondary level fuel,darkcyan
+HE2X,HE2,Heat from power plants,Secondary level fuel,darkgray
+EL02,EL2,Electricity after transmission,Secondary level fuel,darkgrey
+FW3X,FW3,Total Firewood demand (non-power sector),Final Electricity Demand,darkmagenta
+HE3X,HE3,Total Heat demand,Final Electricity Demand,darkorange
+EL03,EL3,Total Electricity demand,Final Electricity Demand,darkred
+HF3X,HF3,Total Heavy Fuel Oil demand (non-power sector),Final Electricity Demand,darkseagreen
+LF3X,LF3,Total Light Fuel Oil demand (non-power sector),Final Electricity Demand,darkslategray
+CH3X,CH3,Total Charcoal demand (non-power sector),Final Electricity Demand,darkturquoise
+GA3X,GA3,Total Gas demand (non-power sector),Final Electricity Demand,deeppink
+CO3X,CO3,Total Coal demand (non-power sector),Final Electricity Demand,dimgray
+BO3X,BO3,Total Biofuel demand (non-power sector),Final Electricity Demand,dodgerblue
+CR3X,CR3,Total Crude Oil demand (for exports),Final Electricity Demand,floralwhite
+DUEL,DEL,Electricity exports to non-African countries,Tertiary level fuel,fuchsia
+DULG,DLG,LNG exports to non-African countries,Tertiary level fuel,ghostwhite
+DUNG,DNG,NG exports (via pipeline) to non-African countries,Tertiary level fuel,goldenrod
+MAGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,gray
+TNGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,greenyellow
+DZGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,grey01
+DJGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,grey03
+UGGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,grey05
+BJGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,grey07
+GHGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,grey11
+NEGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,grey13
+TGGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,honeydew
