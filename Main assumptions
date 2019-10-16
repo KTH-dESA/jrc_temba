@@ -3,3 +3,4 @@ The capacity factors of the old thermal power plants are 5% less than the new co
 The old thermal power plants will generate at least 20% of their capacity until they are phased out of the system. This has been modelled using the TotalTechnologyAnnualActivityLowerLimit.
 The existing LNG terminals can not export more than their generation/capacity (the totalannualactivityuperlimit was used)
 XXREN= emission factor that was used to model the RET targets for each country. The annual emission limit for this factor is equal to 0. Where the emissionactivityratio has been set up in a way to capture the RET target between fossil fuels and renewables. 
+Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines): MAGASP: Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX). 
