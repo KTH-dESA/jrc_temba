@@ -1,0 +1,6 @@
+code (Old),code (New),Description,Group,Colour
+REN,,Emission factor that was used to model the RET targets for each country.,Emissions,aliceblue
+CO2,,Emission factor for CO2,Emissions,aqua
+CH4,,Emission factor for methane but it was not assigned in any fuel,Emissions,azure
+N20,,Emission factor for Nitrous Oxide but it was not assigned in any fuel,Emissions,bisque
+FGA,,Emission factor for Fluorinated gases but it was not assigned in any fuel,Emissions,blanchedalmond
