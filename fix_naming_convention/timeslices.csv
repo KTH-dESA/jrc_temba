@@ -1,0 +1,9 @@
+Code,Description,Group,Colour
+S1D1,Season 1 Daypart 1 (March-May),Timeslice,aliceblue
+S1D2,Season 1 Daypart 2 (March-May),Timeslice,aqua
+S2D1,Season 2 Daypart 1 (Sept-Nov),Timeslice,azure
+S2D2,Season 2 Daypart 2 (Sept-Nov),Timeslice,bisque
+S3D1,Season 3 Daypart 1 (Dec-Feb),Timeslice,blanchedalmond
+S3D2,Season 3 Daypart 2 (Dec-Feb),Timeslice,bluegray
+S4D1,Season 4 Daypart 1 (June-August),Timeslice,blueviolet
+S4D2,Season 4 Daypart 2 (June-August),Timeslice,brightblue
