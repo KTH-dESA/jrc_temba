@@ -16,16 +16,16 @@ WAT2,WA2,Water consumption fuel,Water,cyan
 EL01,EL1,Electricity from power plants,Secondary level fuel,darkcyan
 HE2X,HE2,Heat from power plants,Secondary level fuel,darkgray
 EL02,EL2,Electricity after transmission,Secondary level fuel,darkgrey
-FW3X,FW3,Total Firewood demand (non-power sector),Final Electricity Demand,darkmagenta
-HE3X,HE3,Total Heat demand,Final Electricity Demand,darkorange
-EL03,EL3,Total Electricity demand,Final Electricity Demand,darkred
-HF3X,HF3,Total Heavy Fuel Oil demand (non-power sector),Final Electricity Demand,darkseagreen
-LF3X,LF3,Total Light Fuel Oil demand (non-power sector),Final Electricity Demand,darkslategray
-CH3X,CH3,Total Charcoal demand (non-power sector),Final Electricity Demand,darkturquoise
-GA3X,GA3,Total Gas demand (non-power sector),Final Electricity Demand,deeppink
-CO3X,CO3,Total Coal demand (non-power sector),Final Electricity Demand,dimgray
-BO3X,BO3,Total Biofuel demand (non-power sector),Final Electricity Demand,dodgerblue
-CR3X,CR3,Total Crude Oil demand (for exports),Final Electricity Demand,floralwhite
+FW3X,FW3,Total Firewood demand (non-power sector),Final Energy Demand,darkmagenta
+HE3X,HE3,Total Heat demand,Final Energy Demand,darkorange
+EL03,EL3,Total Electricity demand,Final Energy Demand,darkred
+HF3X,HF3,Total Heavy Fuel Oil demand (non-power sector),Final Energy Demand,darkseagreen
+LF3X,LF3,Total Light Fuel Oil demand (non-power sector),Final Energy Demand,darkslategray
+CH3X,CH3,Total Charcoal demand (non-power sector),Final Energy Demand,darkturquoise
+GA3X,GA3,Total Gas demand (non-power sector),Final Energy Demand,deeppink
+CO3X,CO3,Total Coal demand (non-power sector),Final Energy Demand,dimgray
+BO3X,BO3,Total Biofuel demand (non-power sector),Final Energy Demand,dodgerblue
+CR3X,CR3,Total Crude Oil demand (for exports),Final Energy Demand,floralwhite
 DUEL,DEL,Electricity exports to non-African countries,Tertiary level fuel,fuchsia
 DULG,DLG,LNG exports to non-African countries,Tertiary level fuel,ghostwhite
 DUNG,DNG,NG exports (via pipeline) to non-African countries,Tertiary level fuel,goldenrod
