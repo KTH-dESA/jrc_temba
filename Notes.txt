@@ -1,0 +1,82 @@
+In the TEMBA_03_07_Reference scenario I have changed the demands for the following countries since in the previous model the electricity demand was decreasing between 2016 and 2021.
+Botswana
+Ghana
+Lesotho
+Mali
+Mozambique
+Namibia
+Swaziland
+Zambia
+Zimbabwe
+
+Oil demands:
+Benin
+Botswana
+Mauritania
+Namibia
+Swaziland
+
+Biomass projection:
+Democratic Republic of the Congo
+Equatorial Guinea
+Ethiopia
+Gabon
+Guinea-Bissau
+Liberia
+Mozambique
+Nigeria
+United Republic of Tanzania
+Uganda
+Zambia
+Zimbabwe
+
+
+Coal:
+Lesotho
+Nigeria
+
+I updated the investments in Geothermal in Ethiopia (also in the other scenarios)
+I updated the electricity export/import prices for trades outside of Africa assuming 0.3 USD/kWh or 85 USD/GJ to 100 USD/GJ to 115 USD/GJ to 130 USD/GJ
+
+
+I updated the Capital costs of LNG and Regasification terminals. The variable cost of the technology is not included.
+
+I update the max capacity investments in solar in Cameroon, TD, CAF, CG, TD
+
+
+In the TEMBA_05_07_1.5 model I have increased the annual emission limit of DZ and LY the period 2068-2070 since the model was giving an error in 2069.
+
+
+I updated the Gas demands and Coal of the Northern countries.
+
+The 23 version has the solar CF for the following technologies updated:
+Only for Solar (no storage) the CF for PV. Reducing it at night to .05 (daypart2). Upping it during the day (daypart 1) to take up what was removed from the night (daypart 2)
+Zambia, Zimbabwe, Botswana, Somalia, Kenya.
+
+The 27th revision includes:
+The following changes have been implemented:
+- 100 MW burundi geothermal potential
+- Chad set up a lower upper limit on solar investments annualy
+- BF block nuclear investments
+- Zimbabwe hydro potential 2.2 GW
+- Namibia 2 GW of hydropotential
+- Allow Diesel investments in the first years on the countries that have backstop technologies
+(CF: until 2020, CM: until 2019, Guinea Bissau: until 2018, Mali: until 2019, SO: until 2019, TZ: until 2019)
+
+1.5oC:
+- Namibia hydro potential (2 GW)
+- South Africa 2.285 Max capacity (no new investments)
+- Mozambique 5.569GW max capacity hydro potential
+- Zimbabwe hydro potential 2.2GW
+
+Allow investments on LFO stand alone generators to all the countries starting from 2015.
+
+Version: 13_09
+- Updated the water factors for CCS technologies
+- Updated the water factors for nuclear power plants - assign 0 water factor for nuclear plants to the coastal countries
+
+Version: 21_10
+- Include water withdrawal in uranium extraction technologies
+- Updated the capital costs of LNG terminals
+- Updated variable costs of wind, solar and uranium extraction (BW,GN,NE,TZ,ZM) technologies
+- Include transportation losses for the non-electricity fuels (5% assumed)
