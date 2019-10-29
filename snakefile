@@ -1,4 +1,4 @@
-MODELRUNS = ["TEMBA_29_08_Refer", "TEMBA_29_08_2oC_2020RET", "TEMBA_29_08_1.5C_2020RET"]
+MODELRUNS = ["TEMBA_21_10_Refer", "TEMBA_21_10_2oC", "TEMBA_21_10_1.5C"]
 
 rule all:
     # input: ["results/{model_run}.pickle".format(model_run=model_run) for model_run in MODELRUNS]
