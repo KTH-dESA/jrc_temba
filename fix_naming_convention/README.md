@@ -8,11 +8,11 @@
 `^^^___`: first three characters 01-03 represent country code
 
 `___^^^`: last three characters 04-06
-- list of fuels: `ETH, CO1, CO2, BIO, COA, LFO, GAS, HFO, SOL, WIN, URN, CHA, WA1, WA2, EL1, HE2, EL2, FW3, HE3, EL3, HF3, LF3, CH3, GA3, CO3, BO3, CR3, DEL, DLG, DNG`
-- the fuels that have number `3` at the end represent the final energy demand `FW3, HE3, EL3, HF3, LF3, CH3, GA3, CO3, BO3, CR3`
+- list of fuels: `ETH, CR1, CR2, BIO, COA, LFO, GAS, HFO, SOL, WIN, URN, CHA, WA1, WA2, EL1, HE2, EL2, FW3, HE3, EL3, HF3, LF3, CH3, GA3, CA3, BO3, CR3, DEL, DLG, DNG`
+- the fuels that have number `3` at the end represent the final energy demand `FW3, HE3, EL3, HF3, LF3, CH3, GA3, CA3, BO3, CR3`
 - the fuels that have the description `GASP` at the end represent the intermediate fuels for NG pipeline
 
-** Note: `CO1, CO2, CO3, BO3` the first two are characters and only the last one is a number
+** Note: `BO3` the first two are characters and only the last one is a number
 
 ## Tech codes: 12 characters
 
