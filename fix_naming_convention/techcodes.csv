@@ -105,7 +105,7 @@ SOC1P00X,SOLCNP01X,CSP (without storage),Power_plants,grey
 SOC2P00X,SOLCSP01X,CSP (with storage),Power_plants,lavender
 SOLAR00X,SOLPRP00X,Solar potential,Extraction/Import,lightgrey
 SOU1P03X,SOLPUP00X,Solar PV (utility),Power_plants,mediumorchid
-SOV1F01X,SOLPRP00X,Solar PV (roof top),Power_plants,navajowhite
+SOV1F01X,SOLPVP00X,Solar PV (roof top),Power_plants,navajowhite
 SOV2F01X,SOLPSP00X,Solar PV with storage,Power_plants,pearl04
 UR00I00X,URNIMP00X,Uranium imports,Extraction/Import,polarorange
 UR00X00X,URNPRP00X,Uranium extraction,Extraction/Import,silver
@@ -195,14 +195,14 @@ GHELBJBP00,,Ghana - Benin EL planned trade link,Exports_EL,polardark
 NEELBJBP00,,Niger - Benin EL planned trade link,Exports_EL,polardust
 TGELBJBP00,,Togo - Benin EL existing trade link,Exports_EL,polargreen
 BFELNEBP00,,Burkina Faso - Niger EL planned trade link,Exports_EL,polarpurple
-CIELBFBP00,,Cote d´ Ivoire - Burkina Faso EL existing trade link,Exports_EL,powderblue
+CIELBFBP00,,Cote dÂ´ Ivoire - Burkina Faso EL existing trade link,Exports_EL,powderblue
 GHELBFBP00,,Ghana - Burkina Faso EL planned trade link,Exports_EL,red
 NEELBFBP00,,Niger - Burkina Faso EL existing and planned trade link,Exports_EL,rosybrown
-CIELSLBP00,,Cote d´ Ivoire - Sierra Leone EL planned trade link,Exports_EL,saddlebrown
-CIELGHBP00,,Cote d´ Ivoire - Ghana EL planned trade link,Exports_EL,sandybrown
-CIELLRBP00,,Cote d´ Ivoire - Liberia EL planned trade link,Exports_EL,seagreen
-GHELCIBP00,,Ghana - Cote d´ Ivoire EL existing trade link,Exports_EL,sienna
-MLELCIBP00,,Mali - Cote d´ Ivoire EL planned trade link,Exports_EL,skyblue
+CIELSLBP00,,Cote dÂ´ Ivoire - Sierra Leone EL planned trade link,Exports_EL,saddlebrown
+CIELGHBP00,,Cote dÂ´ Ivoire - Ghana EL planned trade link,Exports_EL,sandybrown
+CIELLRBP00,,Cote dÂ´ Ivoire - Liberia EL planned trade link,Exports_EL,seagreen
+GHELCIBP00,,Ghana - Cote dÂ´ Ivoire EL existing trade link,Exports_EL,sienna
+MLELCIBP00,,Mali - Cote dÂ´ Ivoire EL planned trade link,Exports_EL,skyblue
 GMELGWBP00,,Gambia - Guinea Bissau EL planned trade link,Exports_EL,slategray
 GMELSNBP00,,Gambia - Senegal EL planned trade link,Exports_EL,smurf
 TGELGHBP00,,Togo - Ghana EL planned trade link,Exports_EL,springgreen
