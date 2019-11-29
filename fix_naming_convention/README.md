@@ -27,7 +27,7 @@
 `___^^^______`: character 04-06 represent the type of fuel (`BIO, COA, CHA, CO1, CO2, EL1, EL2,
 ETH, GEO, HE2, HFO, HYD, LFO, NGA, BIO, URN, SOL, WA2, WIN, LNG`) . Note `LNG` is not in the list of fuels but it has been added as a code in the technologies to distinguish between natural gas imports and LNG imports.
 
-`______^^____`: character 07-08 represent the type of technology (`CH`: biomass CHP plant, `SC`:Superctritical coal, `CV`: conventional geothermal, `GC`: gas cycle, `LS`: large size hydro, `MS`: medium size hydro, `SS`: small size hydro, `SA`: stand alone, `RC`: LFO, `CC`: combined cycle, `PW`: pressurized water reactor (nuclear), `CN`: CSP (without storage), `CS`: CSP (with                           storage), `PU`: PV(utility), `PR`: PV(roof top), `PS`: PV (with storage), `ON`: onshore (wind), `OF`: offshore (wind)
+`______^^____`: character 07-08 represent the type of technology (`CH`: biomass CHP plant, `SC`:Superctritical coal, `CV`: conventional geothermal, `GC`: gas cycle, `LS`: large size hydro, `MS`: medium size hydro, `SS`: small size hydro, `SA`: stand alone, `RC`: LFO, `CC`: combined cycle, `PW`: pressurized water reactor (nuclear), `CN`: CSP (without storage), `CS`: CSP (with                           storage), `PU`: PV(utility), `PV`: PV(roof top), `PS`: PV (with storage), `ON`: onshore (wind), `OF`: offshore (wind)
 
 `________^___`: character 09 represent if the technology includes CCS or not. (`P`: its a power
 generation tech. without CCS, `C`: its a power generation tech. with CCS)
