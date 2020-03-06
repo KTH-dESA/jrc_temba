@@ -28,6 +28,8 @@ if [ "$1" != "" ]; then
     # Generate the processed results files including csv files of computed results and a pickle file for the viewer
     python scripts/generate_pickle.py  output_data/$MODEL_RUN_NAME.txt results/$MODEL_RUN_NAME.sol gurobi results/$MODEL_RUN_NAME.pickle results/$MODEL_RUN_NAME
 
+    python scripts/generate_results.py results/$MODEL_RUN_NAME.pickle $MODEL_RUN_NAME results/export_$MODEL_RUN_NAME
+
 else
     echo "usage: bash $0 <model run name>"
     exit 1
