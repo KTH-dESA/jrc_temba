@@ -15,6 +15,9 @@ using miniconda so that snakemake can manage custom environments for each of the
 - `pandas`
 - `xlrd`
 - [`snakemake`](https://snakemake.readthedocs.io/en/stable/index.html)
+- `plotly`
+- `cufflinks-py`
+-
 
 ## Running the TEMBA workflow
 
@@ -34,7 +37,7 @@ number of threads to use e.g. `snakemake -j 8`.
 ## Licensing
 
 - Data is released under the terms of a CC-BY 4.0 License Agreement.
-- A modified copy of OSeMOSYS is redistribruted in this repository under Apache 2.0 license agreement, 
+- A modified copy of OSeMOSYS is redistribruted in this repository under Apache 2.0 license agreement,
   a copy of which can be found in the `model` folder
 
 ## Citation
