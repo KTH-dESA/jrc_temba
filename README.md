@@ -17,7 +17,16 @@ using miniconda so that snakemake can manage custom environments for each of the
 - [`snakemake`](https://snakemake.readthedocs.io/en/stable/index.html)
 - `plotly`
 - `cufflinks-py`
--
+- `plotly-orca`
+
+Alternatively, use the included environment file to generate a conda environment:
+
+    conda env create -f envs/results.yaml
+
+## Generating results from a CPLEX results file
+
+Run the script `run_results_cplex.sh` for each model run, editing the first line `MODEL_RUN_NAME`.
+This produces csv files and png plots in the `results/export_$MODEL_RUN_NAME/` path
 
 ## Running the TEMBA workflow
 

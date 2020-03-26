@@ -19,8 +19,16 @@ import plotly.io as pio
 import cufflinks
 import plotly.offline as pyo
 import tempfile
-pyo.init_notebook_mode()
-cufflinks.go_offline()
+
+import logging
+
+LOGGER = logging.getLogger(__name__)
+logging.basicConfig(format='%(asctime)s %(message)s',
+                    filename='output_data/generate_pickle.log',
+                    level=logging.DEBUG)
+
+# pyo.init_notebook_mode()
+cufflinks.go_offline(connected=False)
 cufflinks.set_config_file(world_readable=True, theme='white', offline=True)
 
 picklefile = sys.argv[1]
@@ -88,14 +96,14 @@ with tempfile.TemporaryDirectory() as temp:
             print('There are no values for the result variable that you want to plot')
         else:
             fig = df.iplot(x='y',
-                        kind='bar',
-                        barmode='stack',
-                        xTitle='Year',
-                        yTitle=y_title,
-                        color=[color_dict[x] for x in df.columns if x != 'y'],
-                        title=(p_title+"-"+scenario),
-                        showlegend=True,
-                        asFigure=True)
+                           kind='bar',
+                           barmode='stack',
+                           xTitle='Year',
+                           yTitle=y_title,
+                           color=[color_dict[x] for x in df.columns if x != 'y'],
+                           title=(p_title+"-"+scenario),
+                           showlegend=True,
+                           asFigure=True)
             fig.update_xaxes(range=[2015, 2065])
             pio.write_image(fig, '{}.png'.format(p_title))
             df.to_csv(os.path.join(homedir, p_title+"-"+scenario+".csv"))
@@ -171,9 +179,9 @@ with tempfile.TemporaryDirectory() as temp:
         cap_new_df['t'] = cap_new_df['t'].str[2:10]
         cap_new_df['value'] = cap_new_df['value'].astype('float64')
         cap_new_df = cap_new_df[cap_new_df['t'].isin(t_include)].pivot_table(index='y',
-                                                                            columns='t',
-                                                                            values='value',
-                                                                            aggfunc='sum').reset_index().fillna(0)
+                                                                             columns='t',
+                                                                             values='value',
+                                                                             aggfunc='sum').reset_index().fillna(0)
         cap_new_df = cap_new_df.reindex(sorted(cap_new_df.columns), axis=1).set_index(
             'y').reset_index().rename(columns=det_col)
         #cap_new_df['y'] = years
@@ -534,6 +542,7 @@ with tempfile.TemporaryDirectory() as temp:
 
     for ref_y in [2020, 2030, 2040, 2050, 2060, 2070]:
 
+
         ccs = country_code['Country code'].values
         total_df = []
         for cc in ccs:
@@ -614,7 +623,7 @@ with tempfile.TemporaryDirectory() as temp:
                         'BJ', 'BF', 'CI', 'GM', 'GH', 'GN', 'GW', 'LR', 'ML', 'NE', 'NG', 'SN', 'SL', 'TG', 'CM', 'CF', 'TD', 'CG', 'CD', 'GQ', 'GA', 'SS']}
 
 
-    # # In the follwoing block, the capacity and generation graphs for all the powerpools and 
+    # # In the follwoing block, the capacity and generation graphs for all the powerpools and
     # TEMBA will be plotted and CSV files generated
     # first for loop to loop over the major dictionary keys
     for tk in pp_def.keys():
@@ -973,14 +982,14 @@ with tempfile.TemporaryDirectory() as temp:
                 '-' + 'Coal production by technology')
 
 
-    for each in country_code['Country Name']:
-        power_chart(each)
-        water_chart(each)
-        emissions_chart(each)
-        gas_chart(each)
-        crude_chart(each)
-        coal_biomass_chart(each)
-        hfo_lfo_chart(each)
+    for country in country_code['Country Name']:
+        power_chart(country)
+        water_chart(country)
+        emissions_chart(country)
+        gas_chart(country)
+        crude_chart(country)
+        coal_biomass_chart(country)
+        hfo_lfo_chart(country)
 
     # this block will create individual country folders and paste (all country specific csv and png files)
     # files from the home directory to the path mentioned below

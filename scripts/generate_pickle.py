@@ -24,7 +24,7 @@ logging.basicConfig(format='%(asctime)s %(message)s',
 
 def read_gurobi_results(data_file):
     LOGGER.info("Reading models results in Gurobi format from %s", data_file)
-    df = pd.read_csv(data_file, sep='$', header=None, skiprows=2) # type: pandas.DataFrame
+    df = pd.read_csv(data_file, sep='$', header=None, skiprows=2)  # type: pandas.DataFrame
     df.columns = ['temp']
     df[['parameter', 'id', 'value']] = df['temp'].str.split(r'\)|\(', expand=True)
     df = df.drop('temp', axis=1)
@@ -33,7 +33,7 @@ def read_gurobi_results(data_file):
 
 def read_cbc_results(data_file):
     LOGGER.info("Reading models results in CBC format from %s", data_file)
-    df = pd.read_csv(data_file, sep='$', header=None) # type: pandas.DataFrame
+    df = pd.read_csv(data_file, sep='$', header=None)  # type: pandas.DataFrame
     df.columns = ['temp']
     df[['temp','value']] = df['temp'].str.split(')', expand=True)
     df = df.applymap(lambda x: x.strip() if isinstance(x,str) else x)
@@ -43,10 +43,11 @@ def read_cbc_results(data_file):
     df = df.drop('temp', axis=1)
     df = df[~df['value'].str.contains('e-')]
     LOGGER.debug("Read in %s rows of data", df.shape)
-    return df
+    return df[['parameter', 'id', 'value']]
 
 
-def main(input_file : str, data_file : str, pickle_file : str, result_format='gurobi', csv_folder='./'):
+def main(input_file: str, data_file: str, pickle_file: str,
+         result_format: str = 'gurobi', csv_folder: str = './'):
     """
 
     Arguments
@@ -57,6 +58,8 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
         Path to the solution file
     pickle_file : str
         Path to which to write the pickle file
+    result_format : str, default='gurobi'
+    csv_folder : str
     """
 
     if result_format == 'gurobi':
@@ -66,10 +69,13 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
     else:
         raise ValueError("Did not understand result_format %s. Must be gurobi or cbc.", result_format)
 
+    LOGGER.debug("Data: %s\n", df.head())
+
     params = df.parameter.unique()
+    LOGGER.debug("Parameters: %s", params)
     all_params = {}
     cols = {'NewCapacity': ['r','t','y'],
-            'AccumulatedNewCapacity':['r','t','y'], 
+            'AccumulatedNewCapacity':['r','t','y'],
             'TotalCapacityAnnual':['r','t','y'],
             'CapitalInvestment':['r','t','y'],
             'AnnualVariableOperatingCost':['r','t','y'],
@@ -100,7 +106,7 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
         csv_path = os.path.join(csv_folder, str(each)+'.csv')
 
         df_p.to_csv(csv_path, index=None) # Print data for each paramter to a CSV file
-        
+
     lines = [] # type: List
 
     parsing = False
@@ -111,15 +117,22 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
     data_emission = []
 
     output_table = []
-    input_table= []
+    input_table = []
+
+    fuel_list = []
+    start_year = []
+    tech_list = []
+    storage_list = []
+    emission_list = []
+    mode_list = []
 
     with open(input_file, 'r') as f:
         for line in f:
             if line.startswith('set YEAR'):
                 start_year = line.split(' ')[3]
-            elif line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead. 
+            elif line.startswith('set COMMODITY'):  # Extracts list of COMMODITIES from data file. Some models use FUEL instead.
                 fuel_list = line.split(' ')[3:-1]
-            elif line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead. 
+            elif line.startswith('set FUEL'):  # Extracts list of FUELS from data file. Some models use COMMODITIES instead.
                 fuel_list = line.split(' ')[3:-1]
             elif line.startswith('set TECHNOLOGY'):
                 tech_list = line.split(' ')[3:-1]
@@ -140,7 +153,7 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
     with open(input_file, 'r') as f:
         for line in f:
             if line.startswith(";"):
-                parsing = False   
+                parsing = False
             if parsing:
                 if line.startswith('['):
                     emission = line.split(', ')[2]
@@ -148,13 +161,12 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
                 elif line.startswith(start_year):
                     years = line.rstrip(':= ;\n').split(' ')[0:]
                     years = [i.strip(' :=') for i in years]
-                    LOGGER.debug("Read in set of %s years", len(years))
                 elif not line.startswith(start_year):
                     values = line.rstrip(':= ;\n').split(' ')[1:]
                     mode = line.split(' ')[0]
                     data_emission.append(tuple([emission, tech, mode]))
                     data_all.append(tuple([tech, mode]))
-                    for i in range(0,len(years)):
+                    for i in range(0, len(years)):
                         try:
                             emission_table.append(tuple([tech, emission, mode, years[i], values[i]]))
                         except IndexError as ex:
@@ -162,8 +174,8 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
                             raise ex
             if line.startswith('param EmissionActivityRatio'):
                 parsing = True
-                
-                
+
+    LOGGER.debug("Read in set of %s years", len(years))
     # input activity ratios-reading them from the data file
     with open(input_file, 'r') as f:
         for line in f:
@@ -184,14 +196,14 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
                     for i in range(0,len(years)):
                         input_table.append(tuple([tech,fuel,mode,years[i],values[i]]))
             if line.startswith('param InputActivityRatio'):
-                parsing = True            
-                
-                
+                parsing = True
+
+
     # Output activity ratios-reading them from the data file
     with open(input_file, 'r') as f:
         for line in f:
             if line.startswith(";"):
-                parsing = False   
+                parsing = False
             if parsing:
                 if line.startswith('['):
                     fuel = line.split(', ')[2]
@@ -216,7 +228,7 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
     with open(input_file, 'r') as f:
         for line in f:
             if line.startswith(";"):
-                parsing = False   
+                parsing = False
             if parsing:
                 if line.startswith(start_year):
                     years = line.rstrip(':= ;\n').split(' ')[0:]
@@ -325,7 +337,7 @@ def main(input_file : str, data_file : str, pickle_file : str, result_format='gu
     df_anemm.to_csv(csv_path, index=None)
     all_params['AnnualEmissions'] = df_anemm.rename(columns={'AnnualEmissions':'value'})
 
-    # Removing the rate of activity fromt he results to make the pickle file lighter. 
+    # Removing the rate of activity fromt he results to make the pickle file lighter.
     del all_params['RateOfActivity']
 
     LOGGER.debug("Results data has %s rows", len(all_params))
@@ -345,13 +357,12 @@ if __name__ == '__main__':
         print(sys.argv)
         input_file = sys.argv[1]
         data_file = sys.argv[2]
-        pickle_file = sys.argv[4]
         file_format = sys.argv[3]
+        pickle_file = sys.argv[4]
         csv_folder = sys.argv[5]
         # try:
         main(input_file, data_file, pickle_file, file_format, csv_folder)
         # except:
-            # sys.exit(1)
-        # sys.exit(0)
+        #     sys.exit(1)
+        sys.exit(0)
 
-    

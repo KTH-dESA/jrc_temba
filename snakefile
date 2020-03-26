@@ -1,52 +1,54 @@
-MODELRUNS = ["TEMBA_21_10_Refer", "TEMBA_21_10_2oC", "TEMBA_21_10_1.5C"]
+MODELRUNS = ["TEMBA_Refer"]
 
-rule all:
-    # input: ["results/{model_run}.pickle".format(model_run=model_run) for model_run in MODELRUNS]
+rule runs:
+    input: ["output_data/{model_run}.sol".format(model_run=model_run) for model_run in MODELRUNS]
+
+rule results:
     input: ["results/export_{model_run}".format(model_run=model_run) for model_run in MODELRUNS]
 
 rule generate_model_file:
-    input: 
+    input:
         "input_data/{model_run}.xlsx"
-    output: 
+    output:
         "output_data/{model_run}.txt"
-    threads: 
+    threads:
         2
     shell:
         "python scripts/excel_to_osemosys.py {input} {output}"
 
 rule modify_model_file:
-    input:  
+    input:
         "output_data/{model_run}.txt"
-    output: 
+    output:
         "output_data/{model_run}_modex.txt"
-    threads: 
+    threads:
         2
     shell:
         "python scripts/CBC_results_AS_MODEX.py {input} && cat {input} > {output}"
 
-rule generate_lp_file:
-    input: 
-        "output_data/{model_run}_modex.txt"
-    output: 
-        protected("output_data/{model_run}.lp.gz")
-    log: 
-        "output_data/glpsol_{model_run}.log"
-    threads: 
-        1
-    shell:
-        "glpsol -m model/Temba_0406_modex.txt -d {input} --wlp {output} --check --log {log}"
+# rule generate_lp_file:
+#     input:
+#         "output_data/{model_run}_modex.txt"
+#     output:
+#         protected("output_data/{model_run}.lp.gz")
+#     log:
+#         "output_data/glpsol_{model_run}.log"
+#     threads:
+#         1
+#     shell:
+#         "glpsol -m model/Temba_0406_modex.txt -d {input} --wlp {output} --check --log {log}"
 
-rule solve_lp:
-    input: 
-        "output_data/{model_run}.lp.gz"
-    output: 
-        protected("output_data/{model_run}.sol")
-    log: 
-        "output_data/gurobi_{model_run}.log"
-    threads: 
-        2
-    shell:
-        "gurobi_cl NumericFocus=1 Method=2 Threads={threads} ResultFile={output} ResultFile=output_data/infeasible.ilp LogFile={log} {input}"
+# rule solve_lp:
+#     input:
+#         "output_data/{model_run}.lp.gz"
+#     output:
+#         protected("output_data/{model_run}.sol")
+#     log:
+#         "output_data/gurobi_{model_run}.log"
+#     threads:
+#         2
+#     shell:
+#         "gurobi_cl NumericFocus=1 Method=2 Threads={threads} ResultFile={output} ResultFile=output_data/infeasible.ilp LogFile={log} {input}"
 
 rule remove_zero_values:
     input: "output_data/{model_run}.sol"
@@ -55,19 +57,19 @@ rule remove_zero_values:
         "sed '/ * 0$/d' {input} > {output}"
 
 rule generate_pickle:
-    input: 
+    input:
         results="results/{model_run}.sol", modelfile="output_data/{model_run}_modex.txt"
-    output: 
+    output:
         pickle="results/{model_run}.pickle", folder=directory("results/{model_run}")
     shell:
-        "mkdir {output.folder} && python scripts/generate_pickle.py {input.modelfile} {input.results} gurobi {output.pickle} {output.folder}"
+        "mkdir {output.folder} && python scripts/generate_pickle.py {input.modelfile} {input.results} cbc {output.pickle} {output.folder}"
 
 rule generate_results:
-    input: 
+    input:
         pickle="results/{model_run}.pickle"
     params:
         scenario="{model_run}"
-    output: 
+    output:
         folder=directory("results/export_{model_run}")
     conda:
         "envs/results.yaml"
