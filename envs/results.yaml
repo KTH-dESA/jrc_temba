@@ -1,3 +1,4 @@
+name: visualisation
 channels:
   - plotly
   - conda-forge
