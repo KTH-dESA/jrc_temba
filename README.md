@@ -23,6 +23,9 @@ To run the workflow with snakemake, type the command `snakemake`.
 To perform a dry run, use the flag `-n` and to run the workflow in parallel, use the flag `-j` and pass the (optional)
 number of threads to use e.g. `snakemake -j 8`.
 
+## Visualization of the results
+In the following link you can visualize the results 
+
 ## Folder structure
 
 - Input data are stored in `.xlsx` Excel files in the `input_data` folder
