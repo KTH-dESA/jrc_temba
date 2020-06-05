@@ -44,5 +44,5 @@ welcome to do so, provided you abide by the terms of the licenses detailed above
 
 Please cite this work in the following manner:
 
-    Pappis, I., Howells, M., Sridharan, V., Usher, W., Shivakumar, A., Gardumi, F., Ramos, E., 2019,
-    Energy demand projections for African countries: The Energy Model Base for Africa (TEMBA)
+    Pappis, I., Sridharan, V., Howells, M., Medarac, H., Kougias I., Sánchez G. R., Shivakumar, A., Usher, W., 2019,
+    Conflicting objectives of energy development and water security in Africa
