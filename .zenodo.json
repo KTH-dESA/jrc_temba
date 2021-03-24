@@ -1,0 +1,26 @@
+{
+    "license": "CCBY-4.0",
+    "upload_type": "dataset",
+    "creators": [
+        {
+            "affiliation": "KTH Royal Institute of Technology",
+            "name": "Ioannis Pappis",
+            "orcid": "0000-0001-9367-1791"
+        },
+        {
+            "affiliation": "KTH Royal Institute of Technology",
+            "name": "Vignesh Sridharan",
+            "orcid": "0000-0001-9367-1791"
+        },
+        {
+            "affiliation": "KTH Royal Institute of Technology",
+            "name": "Will Usher",
+            "orcid": "0000-0001-9367-1791"
+        },
+        {
+            "name": "Mark Howells",
+            "orcid": "0000-0001-6419-4957"
+        }
+    ],
+    "access_right": "open"
+}
