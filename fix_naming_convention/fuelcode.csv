@@ -33,7 +33,7 @@ COEX,COE,Coal export,Tertiary level fuel,dark
 CREX,CRE,Crude Oil export,Tertiary level fuel,red
 HFEX,HFE,Heavy Fuel oil export,Tertiary level fuel,darkred
 LFEX,LFE,Light Fuel oil export,Tertiary level fuel,lightred
-FEWX,FEW,Firewood export,Tertiary level fuel,green
+FEWX,FWE,Firewood export,Tertiary level fuel,green
 MAGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,gray
 TNGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,greenyellow
 DZGASP,,Intermediate fuels for NG transferred through a pipeline (only countries that have NG pipelines); (Output fuel from the gas pipeline allocated in the exported country (e.g. DZNGMABP00) - Input fuel to the intermediate gas pipeline to the importing country (e.g. MANG00IPIX).),Intermediate fuel,grey01
