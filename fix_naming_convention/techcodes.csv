@@ -35,10 +35,10 @@ COSCP04N,COASCP04N,Coal power plant - OTF/OTS cooling (new),Power_plants,greenye
 CR00I00X,CO1IMP00X,Crude Oil imports,Extraction/Import,grey01
 CR00P00X,CO1DIP00X,Crude Oil process (non-power sector),Conversion,grey03
 CR00X00X,CO1PRP00X,Crude Oil extraction,Extraction/Import,grey05
-CR00E00X,CO100E00X,Crude Oil exports,Exports,grey06
-CRUDPROX,CO1??????,Crude oil refinery capacity,Conversion,grey07
-CRUDRE1X,CO2??????,Crude oil refinery 1,Conversion,grey11
-CRUDRE2X,CO2??????,Crude oil refinery 2,Conversion,grey13
+CR00E00X,CO1EXP00X,Crude Oil exports,Exports,grey06
+CRUDPROX,CO1RCP00X,Crude oil refinery capacity,Conversion,grey07
+CRUDRE1X,CO2R1P00X,Crude oil refinery 1,Conversion,grey11
+CRUDRE2X,CO2R2P00X,Crude oil refinery 2,Conversion,grey13
 EL00T00X,EL1TRP00X,Transmission technology (Secondary to Tertiary),Transmission&Distribution,grey11
 EL00TDTX,EL2DIP00X,Distribution technology (Distribution to final electricity demand),Transmission&Distribution,grey13
 ETHANOLX,ETHPRP00X,Ethanol production,Extraction/Import,honeydew
