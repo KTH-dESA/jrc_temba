@@ -2,6 +2,7 @@ code (Old),code (New),Description,Group,Colour
 BACKSTOP,BACKSTOP,Backstop technology,Backstop,aliceblue
 BIOFUELX,BO3PRP00X,Biofuel production,Extraction/Import,aqua
 BM00I00X,BIOIMP00X,Biomass imports,Extraction/Import,azure
+BM00E00X,BIOEMP00X,Biomass exports,Exports,darkgreen
 BM00X00X,BIOPRP00X,Biomass extraction/production/refining,Extraction/Import,bisque
 BMCHC01N,BIOCHC01N,Biomass & Waste CHP plant with CCS - Air cooling (new),Power_plants,blanchedalmond
 BMCHC02N,BIOCHC02N,Biomass & Waste CHP plant  with CCS- MDT cooling (new),Power_plants,bluegray
