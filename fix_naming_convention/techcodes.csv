@@ -81,6 +81,7 @@ LFRCP03N,LFORCP03N,Light Fuel Oil power plant - NDT cooling (new),Power_plants,p
 LFRCP04N,LFORCP04N,Light Fuel Oil power plant - OTF/OTS cooling (new),Power_plants,pearl
 NG00I00X,NGAIMP00X,Natural gas imports (inland/offshore pipeline),Extraction/Import,pearl03
 NG00ILGX,LNGIMP00X,Natural gas imports (LNG),Extraction/Import,pearl05
+NG00ELGX,LNGEXP00X,Natural gas exports (Liquification terminal),Exports_NG,indianred
 NG00P00X,NGADIP00X,Natural gas process (non-power sector),Conversion,peru
 NG00X00X,NGAPRP00X,Natural gas extraction,Extraction/Import,pinksalmon
 NGCCC01N,NGACCC01N,Natural gas power plant (combined cycle) - CCS - Air cooling (new),Power_plants,polar
@@ -135,7 +136,6 @@ WIND,TO CHECK WITH VIG,Wind,,navy
 BIOM,TO CHECK WITH VIG,Biomass,,lightgreen
 CO2,TO CHECK WITH VIG,CO2,,black
 Transmission & Distribution,TO CHECK WITH VIG,Transmission & Distribution,,magenta
-NG00ELGX,LNGEXP00X,Natural gas exports (Liquification terminal),Exports_NG,indianred
 DZELMABP00,???EL1EX????,Algeria - Morocco Historic EL trade link,Exports_EL,polarorange
 ESELMABP00,,Spain - Morocco Historic EL trade link,Exports_EL,silver
 EGELSDBP00,,Egypt - Sudan Historic and Planned EL trade link,Exports_EL,tomato
