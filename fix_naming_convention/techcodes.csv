@@ -16,7 +16,8 @@ BMCHP02N,BIOCHP02N,Biomass & Waste CHP plant - MDT cooling (new),Power_plants,cy
 BMCHP03N,BIOCHP03N,Biomass & Waste CHP plant - NDT cooling (new),Power_plants,darkcyan
 BMCHP04N,BIOCHP04N,Biomass & Waste CHP plant - OTF/OTS cooling (new),Power_plants,darkgray
 CH00I00X,CHAIMP00X,Charcoal imports,Extraction/Import,darkgrey
-CO00I00X,COAIMP00X,"Coal imports (inland transport, maritime freight)",Extraction/Import,darkmagenta
+CO00I00X,COAIMP00X,Coal imports (inland transport, maritime freight),Extraction/Import,darkmagenta
+CO00E00X,COAEMP00X,Coal exports,Exports,darkgrey
 CO00P00X,COADIP00X,Coal process (non-power sector),Conversion,darkorange
 CO00X00X,COAPRP00X,Coal extraction (mining),Extraction/Import,darkred
 COSCC01N,COASCC01N,Coal power plant with CCS - Air cooling (new),Power_plants,darkseagreen
@@ -34,6 +35,7 @@ COSCP04N,COASCP04N,Coal power plant - OTF/OTS cooling (new),Power_plants,greenye
 CR00I00X,CO1IMP00X,Crude Oil imports,Extraction/Import,grey01
 CR00P00X,CO1DIP00X,Crude Oil process (non-power sector),Conversion,grey03
 CR00X00X,CO1PRP00X,Crude Oil extraction,Extraction/Import,grey05
+CR00E00X,CO100E00X,Crude Oil exports,Exports,grey06
 CRUDPROX,CO1??????,Crude oil refinery capacity,Conversion,grey07
 CRUDRE1X,CO2??????,Crude oil refinery 1,Conversion,grey11
 CRUDRE2X,CO2??????,Crude oil refinery 2,Conversion,grey13
@@ -51,6 +53,7 @@ GOCVP03N,GEOCVP03N,Geothermal power plant - NDT cooling (new),Power_plants,light
 GOCVP04N,GEOCVP04N,Geothermal power plant - OTF/OTS cooling (new),Power_plants,lightgreen
 HE00T00X,HE2DIP00X,Heat network,Transmission&Distribution,lightivory
 HF00I00X,HFOIMP00X,Heavy Fuel Oil imports,Extraction/Import,lightsalmon
+HF00E00X,HFOEMP00X,Heavy Fuel Oil exports,Exports,blue
 HF00P00X,HFODIP00X,Heavy Fuel Oil process (non-power sector),Conversion,lightskyblue
 HFGCP01O,HFOGCP01O,Oil fired gas turbine (SCGT) - Air cooling (old),Power_plants,lightslategrey
 HFGCP02O,HFOGCP02O,Oil fired gas turbine (SCGT) - MDT cooling (old),Power_plants,lightteal
@@ -64,6 +67,7 @@ HYDMS03X,HYDLSP00X,Large hydropower plant (Dam),Power_plants,mediumpurple
 HYDMS02X,HYDMSP00X,Medium hydropower plant (Run-of river),Power_plants,mediumslateblue
 HYDMS01X,HYDSSP00X,Small hydropower plant,Power_plants,mediumturquoise
 LF00I00X,LFOIMP00X,Light Fuel Oil imports,Extraction/Import,midnightblue
+LF00E00X,LFOEMP00X,Light Fuel Oil exports,Exports,mediumturquoise
 LF00P00X,LFODIP00X,Light Fuel Oil process (non-power sector),Conversion,mistyrose
 LFRCFURX,LFORCP00X,Light Fuel Oil stand alone (1kW),Power_plants,mustard
 LFRCP01O,LFORCP01O,Light Fuel Oil power plant - Air cooling (old),Power_plants,navy
@@ -195,14 +199,14 @@ GHELBJBP00,,Ghana - Benin EL planned trade link,Exports_EL,polardark
 NEELBJBP00,,Niger - Benin EL planned trade link,Exports_EL,polardust
 TGELBJBP00,,Togo - Benin EL existing trade link,Exports_EL,polargreen
 BFELNEBP00,,Burkina Faso - Niger EL planned trade link,Exports_EL,polarpurple
-CIELBFBP00,,Cote d´ Ivoire - Burkina Faso EL existing trade link,Exports_EL,powderblue
+CIELBFBP00,,Cote dÂ´ Ivoire - Burkina Faso EL existing trade link,Exports_EL,powderblue
 GHELBFBP00,,Ghana - Burkina Faso EL planned trade link,Exports_EL,red
 NEELBFBP00,,Niger - Burkina Faso EL existing and planned trade link,Exports_EL,rosybrown
-CIELSLBP00,,Cote d´ Ivoire - Sierra Leone EL planned trade link,Exports_EL,saddlebrown
-CIELGHBP00,,Cote d´ Ivoire - Ghana EL planned trade link,Exports_EL,sandybrown
-CIELLRBP00,,Cote d´ Ivoire - Liberia EL planned trade link,Exports_EL,seagreen
-GHELCIBP00,,Ghana - Cote d´ Ivoire EL existing trade link,Exports_EL,sienna
-MLELCIBP00,,Mali - Cote d´ Ivoire EL planned trade link,Exports_EL,skyblue
+CIELSLBP00,,Cote dÂ´ Ivoire - Sierra Leone EL planned trade link,Exports_EL,saddlebrown
+CIELGHBP00,,Cote dÂ´ Ivoire - Ghana EL planned trade link,Exports_EL,sandybrown
+CIELLRBP00,,Cote dÂ´ Ivoire - Liberia EL planned trade link,Exports_EL,seagreen
+GHELCIBP00,,Ghana - Cote dÂ´ Ivoire EL existing trade link,Exports_EL,sienna
+MLELCIBP00,,Mali - Cote dÂ´ Ivoire EL planned trade link,Exports_EL,skyblue
 GMELGWBP00,,Gambia - Guinea Bissau EL planned trade link,Exports_EL,slategray
 GMELSNBP00,,Gambia - Senegal EL planned trade link,Exports_EL,smurf
 TGELGHBP00,,Togo - Ghana EL planned trade link,Exports_EL,springgreen
