@@ -42,6 +42,8 @@ CRUDRE1X,CO1R1P00X,Crude oil refinery 1,Conversion,grey11
 CRUDRE2X,CO1R2P00X,Crude oil refinery 2,Conversion,grey13
 EL00T00X,EL1TRP00X,Transmission technology (Secondary to Tertiary),Transmission&Distribution,grey11
 EL00TDTX,EL2DIP00X,Distribution technology (Distribution to final electricity demand),Transmission&Distribution,grey13
+EL3DIP00X,EL3DIP00X,Distribution technology (Distribution to final current-unelectrified demand),Transmission&Distribution,grey07
+EL4DIP00X,EL4DIP00X,Distribution technology (Distribution Mini-grid to final current-unelectrified demand),Transmission&Distribution,grey10
 ETHANOLX,ETHPRP00X,Ethanol production,Extraction/Import,honeydew
 FW00P00X,BIODIP00X,Firewood process (non-power sector),Conversion,indianred
 GOCVP01O,GEOCVP01O,Geothermal power plant - Air cooling (old),Power_plants,ivory
