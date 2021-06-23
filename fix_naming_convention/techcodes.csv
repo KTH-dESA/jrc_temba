@@ -121,6 +121,16 @@ WA00000X,WA2PRP00X,Water production technology,Extraction/Import,tomato
 WIND000X,WINPRP00X,Wind potential,Extraction/Import,yellow
 WINDP00X,WINONP00X,Wind (onshore),Power_plants,beige
 WINDP01X,WINOFP00X,Wind (offshore),Power_plants,burlywood
+LFOMGRID1,LFOMGRID1,Light Fuel Oil (mini-grid) Future electrified,MiniGrid,red
+LFOSALON1,LFOSALON1,Light Fuel Oil (Stand Alone) Future electrified,StandAlone,red
+SOLMGRID1,SOLMGRID1,Solar (Mini-Grid) Future electrified,MiniGrid,yellow 
+SOLPRSAL1,SOLPRSAL1,Solar (Stand Alone1) Future electrified,StandAlone,yellow 
+SOLPRSAL2,SOLPRSAL2,Solar (Stand Alone2) Future electrified,StandAlone,yellow 
+SOLPRSAL3,SOLPRSAL3,Solar (Stand Alone3) Future electrified,StandAlone,yellow 
+SOLPRSAL4,SOLPRSAL4,Solar (Stand Alone4) Future electrified,StandAlone,yellow 
+SOLPRSAL5,SOLPRSAL5,Solar (Stand Alone5) Future electrified,StandAlone,yellow 
+WINMGRID1,WINMGRID1,Wind (Mini-Grid) Future electrified,MiniGrid,lightblue
+HYDMGRID1,HYDMGRID1,Hydro (Mini-Grid) Future electrified,MiniGrid,blue
 COALAGG,TO CHECK WITH VIG,Coal,,black
 OILAGG,TO CHECK WITH VIG,Oil,,gray
 GASAGG,TO CHECK WITH VIG,Gas,,orange
