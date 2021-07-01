@@ -18,7 +18,8 @@ HE2X,HE2,Heat from power plants,Secondary level fuel,darkgray
 EL02,EL2,Electricity after transmission,Secondary level fuel,darkgrey
 FW3X,FW3,Total Firewood demand (non-power sector),Final Energy Demand,darkmagenta
 HE3X,HE3,Total Heat demand,Final Energy Demand,darkorange
-EL03,EL3,Total Electricity demand,Final Energy Demand,darkred
+EL03,EL3E,Total Electricity demand (all sectors,current electrified),Final Energy Demand,darkred
+EL3U,EL3U,Total Electricity demand (newly electrified),Final Energy Demand, darkyellow
 HF3X,HF3,Total Heavy Fuel Oil demand (non-power sector),Final Energy Demand,darkseagreen
 LF3X,LF3,Total Light Fuel Oil demand (non-power sector),Final Energy Demand,darkslategray
 CH3X,CH3,Total Charcoal demand (non-power sector),Final Energy Demand,darkturquoise
