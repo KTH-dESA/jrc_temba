@@ -14,8 +14,9 @@ CHAR,CHA,Charcoal fuel,Primary level fuel,coral
 WAT1,WA1,Water withdrawal fuel,Water,cornsilk
 WAT2,WA2,Water consumption fuel,Water,cyan
 EL01,EL1,Electricity from power plants,Secondary level fuel,darkcyan
-HE2X,HE2,Heat from power plants,Secondary level fuel,darkgray
 EL02,EL2,Electricity after transmission,Secondary level fuel,darkgrey
+EL3,EL3,Electricity before distribution technology mini-grid, Secondary level fuel, darkyellow 
+HE2X,HE2,Heat from power plants,Secondary level fuel,darkgray
 FW3X,FW3,Total Firewood demand (non-power sector),Final Energy Demand,darkmagenta
 HE3X,HE3,Total Heat demand,Final Energy Demand,darkorange
 EL03,EL3E,Total Electricity demand (all sectors,current electrified),Final Energy Demand,darkred
