@@ -148,102 +148,102 @@ WIND,TO CHECK WITH VIG,Wind,,navy
 BIOM,TO CHECK WITH VIG,Biomass,,lightgreen
 CO2,TO CHECK WITH VIG,CO2,,black
 Transmission & Distribution,TO CHECK WITH VIG,Transmission & Distribution,,magenta
-DZELMABP00,???EL1EX????,Algeria - Morocco Historic EL trade link,Exports_EL,polarorange
-ESELMABP00,,Spain - Morocco Historic EL trade link,Exports_EL,silver
-EGELSDBP00,,Egypt - Sudan Historic and Planned EL trade link,Exports_EL,tomato
-EGELJOBP00,,Egypt - Jordan Historic EL trade link,Exports_EL,yellow
-EGELSABP00,,Egypt - Saudi Arabia Planned EL trade link,Exports_EL,beige
-LYELEGBP00,,Libya - Egypt Historic EL trade link,Exports_EL,burlywood
-MAELDZBP00,,Morocco - Algeria Historic EL trade link,Exports_EL,black
-TNELDZBP00,,Tunisia - Algeria Historic EL trade link,Exports_EL,gray
-DZNGITBP00,???NGAEX????,Algeria - Italy Historic NG trade link,Exports_NG,orange
-DZNGPOBP00,,Algeria - Portugal Historic NG trade link,Exports_NG,aqua
-DZNGESBP00,,Algeria - Spain Historic and Planned NG trade link,Exports_NG,polarbluelight
-DZNGMABP00,,Algeria - Morocco Historic NG trade link,Exports_NG,lightgreen
-DZNGTNBP00,,Algeria - Tunisia Historic NG trade link,Exports_NG,blueviolet
-EGNGTUBP00,,Egypt - Turkey Historic and Planned NG trade link,Exports_NG,polarorange
-ISNGEGBP00,,Israel - Egypt Planned NG trade link,Exports_NG,silver
-LYNGITBP00,,Libya - Italy Historic NG trade link,Exports_NG,tomato
-NGNGDZBP00,,Nigeria - Algeria Planned NG trade link,Exports_NG,beige
+DZELMABP00,DZAELMARBP00,Algeria - Morocco Historic EL trade link,Exports_EL,polarorange
+ESELMABP00,ESPELMARBP00,Spain - Morocco Historic EL trade link,Exports_EL,silver
+EGELSDBP00,EGYELSDNBP00,Egypt - Sudan Historic and Planned EL trade link,Exports_EL,tomato
+EGELJOBP00,EGYELJORBP00,Egypt - Jordan Historic EL trade link,Exports_EL,yellow
+EGELSABP00,EGYELSAUBP00,Egypt - Saudi Arabia Planned EL trade link,Exports_EL,beige
+LYELEGBP00,LBYELEGYBP00,Libya - Egypt Historic EL trade link,Exports_EL,burlywood
+MAELDZBP00,MARELDZABP00,Morocco - Algeria Historic EL trade link,Exports_EL,black
+TNELDZBP00,TUNELDZABP00,Tunisia - Algeria Historic EL trade link,Exports_EL,gray
+DZNGITBP00,DZAGAITABP00 ,Algeria - Italy Historic NG trade link,Exports_NG,orange
+DZNGPOBP00,DZAGAPRTBP00,Algeria - Portugal Historic NG trade link,Exports_NG,aqua
+DZNGESBP00,DZAGAESPBP00,Algeria - Spain Historic and Planned NG trade link,Exports_NG,polarbluelight
+DZNGMABP00,DZAGAMARBP00,Algeria - Morocco Historic NG trade link,Exports_NG,lightgreen
+DZNGTNBP00,DZAGATUNBP00,Algeria - Tunisia Historic NG trade link,Exports_NG,blueviolet
+EGNGTUBP00,EGYGATURBP00,Egypt - Turkey Historic and Planned NG trade link,Exports_NG,polarorange
+ISNGEGBP00,ISRGAEGYBP00,Israel - Egypt Planned NG trade link,Exports_NG,silver
+LYNGITBP00,LBYGAITABP00,Libya - Italy Historic NG trade link,Exports_NG,tomato
+NGNGDZBP00,NGAGADZABP00,Nigeria - Algeria Planned NG trade link,Exports_NG,beige
 power_trade,TO CHECK WITH VIG,power_trade,,pinksalmon
 gas_trade,TO CHECK WITH VIG,gas_trade,,polarpurple
-BIELRWBP00,,Burundi - Rwanda EL existing trade link,Exports_EL,indianred
-CDELBIBP00,,DRC - Burundi EL existing and planned trade link,Exports_EL,polarorange
-CDELRWBP00,,DRC - Rwanda EL existing and planned trade link,Exports_EL,silver
-ETELKEBP00,,Ethiopia - Kenya EL planned trade link,Exports_EL,tomato
-ETELDJBP00,,Ethiopia - Djibouti EL existing trade link,Exports_EL,yellow
-ETELSDBP00,,Ethiopia - Sudan EL existing trade link,Exports_EL,beige
-KEELUGBP00,,Kenya - Uganda EL existing and planned trade link,Exports_EL,burlywood
-KEELTZBP00,,Kenya - Tanzania EL existing and planned trade link,Exports_EL,black
-RWELBIBP00,,Rwanda - Burundi EL existing trade link,Exports_EL,gray
-RWELTZBP00,,Rwanda - Tanzania EL planned trade link,Exports_EL,orange
-TZELBIBP00,,Tanzania - Burundi EL planned trade link,Exports_EL,aqua
-TZELKEBP00,,Tanzania - Kenya EL planned trade link,Exports_EL,polarbluelight
-TZELUGBP00,,Tanzania - Uganda EL existing trade link,Exports_EL,blueviolet
-UGELKEBP00,,Uganda - Kenya EL existing and planned trade link,Exports_EL,polarorange
-UGELTZBP00,,Uganda - Tanzania EL existing and planned trade link,Exports_EL,silver
-UGELRWBP00,,Uganda - Rwanda EL existing trade link,Exports_EL,tomato
-ETNGDJBP00,,Ethiopia - Djibouti NG planned trade link,Exports_NG,beige
-TZNGUGBP00,,Tanzania - Uganda NG planned trade link,Exports_NG,bisque
-BWELZABP00,,Botswana - South Africa EL existing trade link,Exports_EL,indianred
-CDELZABP00,,DRC - South Africa EL planned trade link,Exports_EL,polarorange
-CDELZMBP00,,DRC - Zambia EL existing trade link,Exports_EL,silver
-LSELZABP00,,Lesotho - South Africa EL existing trade link,Exports_EL,tomato
-MZELZABP00,,Mozambique - South Africa EL existing trade link,Exports_EL,yellow
-MZELSZBP00,,Mozambique - Swaziland EL existing trade link,Exports_EL,beige
-MZELZWBP00,,Mozambique - Zimbabwe EL existing trade link,Exports_EL,burlywood
-NMELZABP00,,Namibia - South Africa EL existing trade link,Exports_EL,black
-ZAELSZBP00,,South Africa - Swaziland EL existing trade link,Exports_EL,gray
-ZAELZWBP00,,South Africa - Zimbabwe EL existing trade link,Exports_EL,orange
-ZMELZWBP00,,Zambia - Zimbabwe EL existing trade link,Exports_EL,aqua
-AOELCDBP00,,Angola - DRC EL planned trade link,Exports_EL,polarbluelight
-BWELZMBP00,,Botswana - Zambia EL planned trade link,Exports_EL,blueviolet
-BWELNMBP00,,Botswana - Namibia EL planned trade link,Exports_EL,polarorange
-BWELZWBP00,,Botswana - Zimbabwe EL planned trade link,Exports_EL,silver
-MWELMZBP00,,Malawi - Mozambique EL planned trade link,Exports_EL,tomato
-MWELTZBP00,,Malawi - Tanzania EL planned trade link,Exports_EL,beige
-NMELZMBP00,,Namibia - Zambia EL planned trade link,Exports_EL,bisque
-NMELZWBP00,,Namibia - Zimbabwe EL planned trade link,Exports_EL,grey11
-TZELZMBP00,,Tanzania - Zambia EL planned trade link,Exports_EL,grey13
-ZMELTZBP00,,Zambia - Tanzania EL planned trade link,Exports_EL,pinksalmon
-BJELNEBP00,,Benin - Niger EL planned trade link,Exports_EL,polar
-BJELGHBP00,,Benin - Ghana EL planned trade link,Exports_EL,polarbluelight
-GHELBJBP00,,Ghana - Benin EL planned trade link,Exports_EL,polardark
-NEELBJBP00,,Niger - Benin EL planned trade link,Exports_EL,polardust
-TGELBJBP00,,Togo - Benin EL existing trade link,Exports_EL,polargreen
-BFELNEBP00,,Burkina Faso - Niger EL planned trade link,Exports_EL,polarpurple
-CIELBFBP00,,Cote d´ Ivoire - Burkina Faso EL existing trade link,Exports_EL,powderblue
-GHELBFBP00,,Ghana - Burkina Faso EL planned trade link,Exports_EL,red
-NEELBFBP00,,Niger - Burkina Faso EL existing and planned trade link,Exports_EL,rosybrown
-CIELSLBP00,,Cote d´ Ivoire - Sierra Leone EL planned trade link,Exports_EL,saddlebrown
-CIELGHBP00,,Cote d´ Ivoire - Ghana EL planned trade link,Exports_EL,sandybrown
-CIELLRBP00,,Cote d´ Ivoire - Liberia EL planned trade link,Exports_EL,seagreen
-GHELCIBP00,,Ghana - Cote d´ Ivoire EL existing trade link,Exports_EL,sienna
-MLELCIBP00,,Mali - Cote d´ Ivoire EL planned trade link,Exports_EL,skyblue
-GMELGWBP00,,Gambia - Guinea Bissau EL planned trade link,Exports_EL,slategray
-GMELSNBP00,,Gambia - Senegal EL planned trade link,Exports_EL,smurf
-TGELGHBP00,,Togo - Ghana EL planned trade link,Exports_EL,springgreen
-GHELTGBP00,,Ghana - Togo EL existing and planned trade link,Exports_EL,tan
-GHELMLBP00,,Ghana - Mali EL planned trade link,Exports_EL,thistle
-GNELMLBP00,,Guinea - Mali EL planned trade link,Exports_EL,turquoise
-GNELSNBP00,,Guinea - Senegal EL planned trade link,Exports_EL,wheat
-SNELMRBP00,,Senegal - Mauritania EL planned trade link,Exports_EL,whitesmoke
-NGNGBJBP00,,Nigeria - Benin Historic NG trade link,Exports_NG,lightsalmon
-NGNGGHBP00,,Nigeria - Ghana Historic NG trade link,Exports_NG,lightskyblue
-NGNGNEBP00,,Nigeria - Niger Historic NG trade link,Exports_NG,lightslategrey
-NGNGTGBP00,,Nigeria - Togo Historic NG trade link,Exports_NG,lightteal
-CMELTDBP00,,Cameroon - Chad EL planned trade link,Exports_EL,navy
-CDELCGBP00,,DRC - Congo EL existing trade link,Exports_EL,lightgreen
-MZNGZABP00,,Mozambique - South Africa Historic NG trade link,Exports_NG,polarbluelight
+BIELRWBP00,BDIELRWABP00,Burundi - Rwanda EL existing trade link,Exports_EL,indianred
+CDELBIBP00,CODELBDIBP00,DRC - Burundi EL existing and planned trade link,Exports_EL,polarorange
+CDELRWBP00,CODELRWABP00,DRC - Rwanda EL existing and planned trade link,Exports_EL,silver
+ETELKEBP00,ETHELKENBP00,Ethiopia - Kenya EL planned trade link,Exports_EL,tomato
+ETELDJBP00,ETHELDJIBP00,Ethiopia - Djibouti EL existing trade link,Exports_EL,yellow
+ETELSDBP00,ETHELSDNBP00,Ethiopia - Sudan EL existing trade link,Exports_EL,beige
+KEELUGBP00,KENELUGABP00,Kenya - Uganda EL existing and planned trade link,Exports_EL,burlywood
+KEELTZBP00,KENELTZABP00,Kenya - Tanzania EL existing and planned trade link,Exports_EL,black
+RWELBIBP00,RWAELBDIBP00,Rwanda - Burundi EL existing trade link,Exports_EL,gray
+RWELTZBP00,RWAELTZABP00,Rwanda - Tanzania EL planned trade link,Exports_EL,orange
+TZELBIBP00,TZAELBDIBP00,Tanzania - Burundi EL planned trade link,Exports_EL,aqua
+TZELKEBP00,TZAELKENBP00,Tanzania - Kenya EL planned trade link,Exports_EL,polarbluelight
+TZELUGBP00,TZAELUGABP00,Tanzania - Uganda EL existing trade link,Exports_EL,blueviolet
+UGELKEBP00,UGAELKENBP00,Uganda - Kenya EL existing and planned trade link,Exports_EL,polarorange
+UGELTZBP00,UGAELTZABP00,Uganda - Tanzania EL existing and planned trade link,Exports_EL,silver
+UGELRWBP00,UGAELRWABP00,Uganda - Rwanda EL existing trade link,Exports_EL,tomato
+ETNGDJBP00,ETHGADJIBP00,Ethiopia - Djibouti NG planned trade link,Exports_NG,beige
+TZNGUGBP00,TZAGAUGABP00,Tanzania - Uganda NG planned trade link,Exports_NG,bisque
+BWELZABP00,BWAELZAFBP00,Botswana - South Africa EL existing trade link,Exports_EL,indianred
+CDELZABP00,CODELZAFBP00,DRC - South Africa EL planned trade link,Exports_EL,polarorange
+CDELZMBP00,CODELZMBBP00,DRC - Zambia EL existing trade link,Exports_EL,silver
+LSELZABP00,LSOELZAFBP00,Lesotho - South Africa EL existing trade link,Exports_EL,tomato
+MZELZABP00,MOZELZAFBP00,Mozambique - South Africa EL existing trade link,Exports_EL,yellow
+MZELSZBP00,MOZELSWZBP00,Mozambique - Swaziland EL existing trade link,Exports_EL,beige
+MZELZWBP00,MOZELZWEBP00,Mozambique - Zimbabwe EL existing trade link,Exports_EL,burlywood
+NMELZABP00,NAMELZAFBP00,Namibia - South Africa EL existing trade link,Exports_EL,black
+ZAELSZBP00,ZAFELSWZBP00,South Africa - Swaziland EL existing trade link,Exports_EL,gray
+ZAELZWBP00,ZAFELZWEBP00,South Africa - Zimbabwe EL existing trade link,Exports_EL,orange
+ZMELZWBP00,ZMBELZWEBP00,Zambia - Zimbabwe EL existing trade link,Exports_EL,aqua
+AOELCDBP00,AGOELCODBP00,Angola - DRC EL planned trade link,Exports_EL,polarbluelight
+BWELZMBP00,BWAELZMBBP00,Botswana - Zambia EL planned trade link,Exports_EL,blueviolet
+BWELNMBP00,BWAELNAMBP00,Botswana - Namibia EL planned trade link,Exports_EL,polarorange
+BWELZWBP00,BWAELZWEBP00,Botswana - Zimbabwe EL planned trade link,Exports_EL,silver
+MWELMZBP00,MWIELMOZBP00,Malawi - Mozambique EL planned trade link,Exports_EL,tomato
+MWELTZBP00,MWIELTZABP00,Malawi - Tanzania EL planned trade link,Exports_EL,beige
+NMELZMBP00,NAMELZMBBP00,Namibia - Zambia EL planned trade link,Exports_EL,bisque
+NMELZWBP00,NAMELZWEBP00,Namibia - Zimbabwe EL planned trade link,Exports_EL,grey11
+TZELZMBP00,TZAELZMBBP00,Tanzania - Zambia EL planned trade link,Exports_EL,grey13
+ZMELTZBP00,ZMBELTZABP00,Zambia - Tanzania EL planned trade link,Exports_EL,pinksalmon
+BJELNEBP00,BENELNERBP00,Benin - Niger EL planned trade link,Exports_EL,polar
+BJELGHBP00,BENELGHABP00,Benin - Ghana EL planned trade link,Exports_EL,polarbluelight
+GHELBJBP00,GHAELBENBP00,Ghana - Benin EL planned trade link,Exports_EL,polardark
+NEELBJBP00,NERELBENBP00,Niger - Benin EL planned trade link,Exports_EL,polardust
+TGELBJBP00,TGOELBENBP00,Togo - Benin EL existing trade link,Exports_EL,polargreen
+BFELNEBP00,BFAELNERBP00,Burkina Faso - Niger EL planned trade link,Exports_EL,polarpurple
+CIELBFBP00,CIVELBFABP00,Cote d´ Ivoire - Burkina Faso EL existing trade link,Exports_EL,powderblue
+GHELBFBP00,GHAELBFABP00,Ghana - Burkina Faso EL planned trade link,Exports_EL,red
+NEELBFBP00,NERELBFABP00,Niger - Burkina Faso EL existing and planned trade link,Exports_EL,rosybrown
+CIELSLBP00,CIVELSLEBP00,Cote d´ Ivoire - Sierra Leone EL planned trade link,Exports_EL,saddlebrown
+CIELGHBP00,CIVELGHABP00,Cote d´ Ivoire - Ghana EL planned trade link,Exports_EL,sandybrown
+CIELLRBP00,CIVELLBRBP00,Cote d´ Ivoire - Liberia EL planned trade link,Exports_EL,seagreen
+GHELCIBP00,GHAELCIVBP00,Ghana - Cote d´ Ivoire EL existing trade link,Exports_EL,sienna
+MLELCIBP00,MLIELCIVBP00,Mali - Cote d´ Ivoire EL planned trade link,Exports_EL,skyblue
+GMELGWBP00,GMBELGNBBP00,Gambia - Guinea Bissau EL planned trade link,Exports_EL,slategray
+GMELSNBP00,GMBELSENBP00,Gambia - Senegal EL planned trade link,Exports_EL,smurf
+TGELGHBP00,TGOELGHABP00,Togo - Ghana EL planned trade link,Exports_EL,springgreen
+GHELTGBP00,GHAELTGOBP00,Ghana - Togo EL existing and planned trade link,Exports_EL,tan
+GHELMLBP00,GHAELMLIBP00,Ghana - Mali EL planned trade link,Exports_EL,thistle
+GNELMLBP00,GINELMLIBP00,Guinea - Mali EL planned trade link,Exports_EL,turquoise
+GNELSNBP00,GINELSENBP00,Guinea - Senegal EL planned trade link,Exports_EL,wheat
+SNELMRBP00,SENELMRTBP00,Senegal - Mauritania EL planned trade link,Exports_EL,whitesmoke
+NGNGBJBP00,NGAGABENBP00,Nigeria - Benin Historic NG trade link,Exports_NG,lightsalmon
+NGNGGHBP00,NGAGAGHABP00,Nigeria - Ghana Historic NG trade link,Exports_NG,lightskyblue
+NGNGNEBP00,NGAGANERBP00,Nigeria - Niger Historic NG trade link,Exports_NG,lightslategrey
+NGNGTGBP00,NGAGATGOBP00,Nigeria - Togo Historic NG trade link,Exports_NG,lightteal
+CMELTDBP00,CMRELTCDBP00,Cameroon - Chad EL planned trade link,Exports_EL,navy
+CDELCGBP00,CODELCOGBP00,DRC - Congo EL existing trade link,Exports_EL,lightgreen
+MZNGZABP00,MOZGAZAFBP00,Mozambique - South Africa Historic NG trade link,Exports_NG,polarbluelight
 GEOTHERMAL,TO CHECK WITH VIG,Geothermal,,polarorange
 CRUDREF,TO CHECK WITH VIG,Crude oil Refinery,,grey09
-MANG00IPIX,???NGA??????, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-TNNG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-DZNG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-DJNG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-UGNG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-BJNG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-GHNG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-NENG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-TGNG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
-ZANG00IPIX,, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+MANG00IPIX,MARGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+TNNG00IPIX,TUNGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+DZNG00IPIX,DZAGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+DJNG00IPIX,DJIGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+UGNG00IPIX,UGAGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+BJNG00IPIX,BENGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+GHNG00IPIX,GHAGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+NENG00IPIX,NERGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+TGNG00IPIX,TGOGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
+ZANG00IPIX,ZAFGAS00IPIX, Intermediate technology for NG transferred through a pipeline to the imported country (input fuel MAGASP (exported by other countries) - output fuel MAGASF (the final fuel used in the country)),Intermediate_NG,
