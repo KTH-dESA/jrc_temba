@@ -111,7 +111,7 @@ NULWP04O,URNPWP04O,Nuclear power plant - OTS/OTF cooling (old),Power_plants,whit
 NULWP04N,URNPWP04N,Nuclear power plant - OTS/OTF cooling (new),Power_plants,yellowgreen
 SOC1P00X,SOLCNP01X,CSP (without storage),Power_plants,grey
 SOC2P00X,SOLCSP01X,CSP (with storage),Power_plants,lavender
-SOLAR00X,SOLPRP00X,Solar potential,Extraction/Import,lightgrey
+SOLAR00X,SOLARP00X,Solar potential,Extraction/Import,lightgrey
 SOU1P03X,SOLPUP00X,Solar PV (utility),Power_plants,mediumorchid
 SOV1F01X,SOLPRP00X,Solar PV (roof top),Power_plants,navajowhite
 SOV2F01X,SOLPSP00X,Solar PV with storage,Power_plants,pearl04
