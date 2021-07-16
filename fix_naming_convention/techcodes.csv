@@ -193,7 +193,6 @@ LSELZABP00,LSOELZAFBP00,Lesotho - South Africa EL existing trade link,Exports_EL
 MZELZABP00,MOZELZAFBP00,Mozambique - South Africa EL existing trade link,Exports_EL,yellow
 MZELSZBP00,MOZELSWZBP00,Mozambique - Swaziland EL existing trade link,Exports_EL,beige
 MZELZWBP00,MOZELZWEBP00,Mozambique - Zimbabwe EL existing trade link,Exports_EL,burlywood
-NMELZABP00,NAMELZAFBP00,Namibia - South Africa EL existing trade link,Exports_EL,black
 ZAELSZBP00,ZAFELSWZBP00,South Africa - Swaziland EL existing trade link,Exports_EL,gray
 ZAELZWBP00,ZAFELZWEBP00,South Africa - Zimbabwe EL existing trade link,Exports_EL,orange
 ZMELZWBP00,ZMBELZWEBP00,Zambia - Zimbabwe EL existing trade link,Exports_EL,aqua
@@ -203,6 +202,8 @@ BWELNMBP00,BWAELNAMBP00,Botswana - Namibia EL planned trade link,Exports_EL,pola
 BWELZWBP00,BWAELZWEBP00,Botswana - Zimbabwe EL planned trade link,Exports_EL,silver
 MWELMZBP00,MWIELMOZBP00,Malawi - Mozambique EL planned trade link,Exports_EL,tomato
 MWELTZBP00,MWIELTZABP00,Malawi - Tanzania EL planned trade link,Exports_EL,beige
+NMELAOBP00,NAMELAGOBP00,Namibia - Angola EL planned trade link,Exports_EL,bisque
+NMELZABP00,NAMELZAFBP00,Namibia - South Africa EL existing trade link,Exports_EL,black
 NMELZMBP00,NAMELZMBBP00,Namibia - Zambia EL planned trade link,Exports_EL,bisque
 NMELZWBP00,NAMELZWEBP00,Namibia - Zimbabwe EL planned trade link,Exports_EL,grey11
 TZELZMBP00,TZAELZMBBP00,Tanzania - Zambia EL planned trade link,Exports_EL,grey13
