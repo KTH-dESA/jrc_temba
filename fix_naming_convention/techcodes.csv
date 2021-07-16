@@ -107,8 +107,8 @@ NGGCP02N,NGAGCP02N,Natural gas power plant (single cycle) - MDT cooling (new),Po
 NGGCP03N,NGAGCP03N,Natural gas power plant (single cycle) - NDT cooling (new),Power_plants,thistle
 NGGCP04N,NGAGCP04N,Natural gas power plant (single cycle) - OTF/OTS cooling (new),Power_plants,turquoise
 NPCHA00X,CHAPRP00X,Charcoal production,Extraction/Import,wheat
-NULWP04O,URNPWP04O,Nuclear power plant - OTS/OTF cooling (old),Power_plants,whitesmoke
-NULWP04N,URNPWP04N,Nuclear power plant - OTS/OTF cooling (new),Power_plants,yellowgreen
+NULWP04O,URNPWP01O,Nuclear power plant - OTS/OTF cooling (old),Power_plants,whitesmoke
+NULWP04N,URNPWP01N,Nuclear power plant - OTS/OTF cooling (new),Power_plants,yellowgreen
 SOC1P00X,SOLCNP01X,CSP (without storage),Power_plants,grey
 SOC2P00X,SOLCSP01X,CSP (with storage),Power_plants,lavender
 SOLAR00X,SOLARP00X,Solar potential,Extraction/Import,lightgrey
